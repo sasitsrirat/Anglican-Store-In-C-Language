@@ -1,0 +1,70 @@
+import java.applet.*;
+import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+class Menus
+{
+	public String name; //+
+	public int price; //+
+	public int totalDishes; //+
+public static void main (String args[])
+{
+	String input;
+	String namefile = "menus.txt";
+
+	InputStreamReader ir = new InputStreamReader(System.in);
+	BufferedReader in = new BufferedReader(ir);
+	System.out.print("Enter menus file : ");
+	
+	try
+	{
+		//String namefile = "menus";
+		input = in.readLine();
+		//System.out.println("ที่พิมพ์ลงไป : " + input); // ตัวตรวจที่พิมพ์
+		boolean name = input.equals(namefile); //ใช้ Boolean ตรวจง่ายกว่า
+		//System.out.print(name); //แสดงผลว่าชื่อถูกหรือผิด
+		
+		if (name == false)//ตรวจว่ามันถูกหรือผิด ชื่ออะ
+		{
+			System.out.println("// Try again");
+			System.out.println("Enter menus file : ");
+		}
+		else
+			System.out.println("Enter Order File : ");
+			
+		/*{
+			namefile = (input == namefile)? "Try again":"Yes";
+			System.out.println(namefile);
+		}*/ //If else Short Version
+	} catch(IOException e)
+		{
+			System.out.println("Try again");
+		}
+	
+	
+}
+
+}
+class Customer
+{
+	public String name;
+	public int order;
+	public int point;
+
+	public void ProcessOrder(int order)
+	{
+		
+		
+	}
+	
+}
+class FoodDelivery
+{
+	
+	
+	
+}
