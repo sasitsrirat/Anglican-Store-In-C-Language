@@ -1,1 +1,146 @@
-dsdad
+#include <stdio.h>
+#include <string.h>
+#include <conio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <time.h>
+void txtcolor(int txt, int back)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), back * 16 + txt);
+}
+void resetc(void)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+}
+void load(int l)
+{
+    int i;
+
+    printf("\n\n\t--------------LOADING--------------\n");
+    printf("\t___________________________________\n\n");
+    printf("\t");
+    for (i = 0; i < l; i++)
+    {
+        txtcolor(0, 20);
+        printf(" "); //spaceinloading
+        resetc();    //anticolorofloading
+    }
+    printf("\n\t___________________________________\n");
+}
+void main()
+{
+    printf("#######################################\n");
+    printf("#######################################\n");
+
+    srand(time(NULL));
+
+    int program, order, sum = 0, i = 0;
+
+    for (int countload = 0; countload < 36; countload++) //lengthofloading
+    {
+        load(countload);
+        Sleep(50); //timeofloading
+        system("cls");
+    }
+    printf("------------------------------------\n");
+    printf("WELCOME TO PROTECTORS ORGANIZATIONS\n");
+    printf("------------------------------------\n");
+//start programs
+    do
+    {
+        printf("------------------------------------\n");
+        printf("           Name of programs         \n");
+        printf("------------------------------------\n");
+        printf("\nAnglican Shop       1\n"); // ร้านขายของของ
+        printf("Corpserve           2\n");   // รับศพไร้ญาติ
+        printf("Church Delivery     3\n");   // บริการจองรถขนศพ
+        printf("High-Low Heresy     4\n");   //คำนวนบุญบาป
+        printf("Exit program        5\n");   //คำนวนบุญบาป
+        
+        do
+        {
+            printf("Select programs by press number : "); scanf("%d",&program);
+            if(program != 1 && program != 2 && program != 3 && program != 4 && program != 5)
+            {
+                printf("----------------------------------------------------------------------------\n");
+                txtcolor(12, 0);
+                printf("                    Error!!! Please try again \n");
+                resetc();
+                printf("----------------------------------------------------------------------------\n");
+            }
+        } while(program != 1 && program != 2 && program != 3 && program != 4 && program != 5);
+
+        switch(program)
+        {
+        case 1 :
+        {
+            printf("\n----------------------------------------------------------------------------\n");
+            txtcolor(14, 0);
+            printf("   + Anglican Shop\n");
+            resetc();
+            printf("   1 Holy water        150THB\n");
+            printf("   2 Gun of heaven     990THB\n");
+            printf("   3 Crucifix Mhor-Praa 80THB\n");
+            printf("   4 Bible Book        50THB\n");
+            printf("   5 Necklace of God   600THB\n");
+            txtcolor(12, 0);
+            printf("   0 Back    \n");
+            resetc();
+
+            do
+            {
+                printf("\nSelect your order : ");
+                scanf("%d",&order);
+                if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5)
+                {
+                    txtcolor(12,0);
+                    printf("--->Error !!! Please try again<--- \n");
+                }
+                resetc();
+            } while (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5);
+
+            switch (order)
+            {
+            case 0:
+                i--;
+                break;
+            case 1:
+                sum = sum + 150;
+                break;
+            case 2:
+                sum = sum + 990;
+                break;
+            case 3:
+                sum = sum + 80;
+                break;
+            case 4:
+                sum = sum + 50;
+                break;
+            case 5:
+                sum = sum + 600;
+                break;
+            }
+            i++;
+            printf("Number of your order : %d \n", i);
+            printf("Cost : %d \n", sum);
+        }break;
+
+        case 2: //program 2 
+        {
+            printf(" "); 
+        }break;
+        case 3: //program 3
+        {
+            printf(" ");
+        }break;
+        case 4: //program 4
+        {
+            printf(" ");
+        }break;
+        case 5: //program 5
+        {
+            printf(" ");
+        }break; 
+        }
+    }while(5);
+}
