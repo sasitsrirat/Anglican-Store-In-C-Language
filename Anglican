@@ -30,13 +30,14 @@ void load(int l)
 }
 void main()
 {
-    system("COLOR 9E");
+    //system("COLOR 9E");
     printf("#######################################\n");
     printf("#######################################\n");
 
     srand(time(NULL));
 
     int program, order, sum = 0, i = 0;
+    char clear ; 
 
     for (int countload = 0; countload < 36; countload++) //lengthofloading
     {
@@ -47,6 +48,7 @@ void main()
     printf("------------------------------------\n");
     printf("WELCOME TO PROTECTORS ORGANIZATIONS\n");
     printf("------------------------------------\n");
+    
     //start programs
     do
     {
@@ -75,99 +77,94 @@ void main()
 
         switch (program)
         {
-        case 1:
-        {
-            do
-            {   resetc();
-                printf("\n----------------------------------------------------------------------------\n");
-                txtcolor(14, 0);
-                printf("   + Anglican Shop\n");
-                resetc();
-                printf("   1 Holy water             150THB\n");
-                printf("   2 Gun of heaven          990THB\n");
-                printf("   3 Crucifix Mhor-Praa     80THB\n");
-                printf("   4 Bible Book             50THB\n");
-                printf("   5 Necklace of God        600THB\n");
-                printf("   6 Reset order\n");
-                txtcolor(12, 0);
-                printf("   0 Back\n");
-                resetc();
-
+            case 1:
+            {
                 do
-                {
-                    printf("\nSelect your order : ");
-                    scanf("%d", &order);
-                    if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
+                {  
+                    resetc();
+                    printf("\n----------------------------------------------------------------------------\n");
+                    txtcolor(14, 0);
+                    printf("   + Anglican Shop\n");
+                    resetc();
+                    printf("   1 Holy water             150THB\n");
+                    printf("   2 Gun of heaven          990THB\n");
+                    printf("   3 Crucifix Mhor-Praa     80THB\n");
+                    printf("   4 Bible Book             50THB\n");
+                    printf("   5 Necklace of God        600THB\n");
+                    printf("   6 Reset order\n");
+                    txtcolor(12, 0);
+                    printf("   0 Back\n");
+                    resetc();
+
+                    do
                     {
-                        txtcolor(12, 0);
-                        printf("--->Error !!! Please try again<--- \n");
-                        resetc();
-                    }
-                } while (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6);
+                        printf("\nSelect your order : ");
+                        scanf("%d", &order);
+                        if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
+                        {
+                            txtcolor(12, 0);
+                            printf("--->Error !!! Please try again<--- \n");
+                            resetc();
+                        }
+                    } while (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6);
 
-                switch (order)
+                    switch (order)
+                    {
+                        case 0: i--; break;
+                        case 1: sum += 150; break;
+                        case 2: sum += 990; break;
+                        case 3: sum += 80; break;
+                        case 4: sum += 50; break;
+                        case 5: sum += 600; break;
+                        case 6: sum = 0; i = 0; i--; break;
+                    } i++;
+                    system("cls");
+                    printf("Number of your order : %d \n", i);
+                    printf("Cost : %d \n", sum);
+                } while (order != 0); //หลุดloopcase1
+            }break;
+
+            case 2: //program 2
+            {
+                printf(" ");
+            }break;
+            case 3: //program 3
+            {
+                printf(" ");
+            }break;
+            case 4: //program 4
+            {
+                printf(" ");
+            }break;
+            default:
+            {
+                if (sum >= 10)
                 {
-                case 0:
-                    i--;
-                    break;
-                case 1:
-                    sum += 150;
-                    break;
-                case 2:
-                    sum += 990;
-                    break;
-                case 3:
-                    sum += 80;
-                    break;
-                case 4:
-                    sum += 50;
-                    break;
-                case 5:
-                    sum += 600;
-                    break;
-                case 6:
-                    sum = 0;
-                    i = 0; i--;
-                    break;
-                }
-                i++;
-                system("cls");
-                printf("Number of your order : %d \n", i);
-                printf("Cost : %d \n", sum);
-            } while (order != 0);
-        }
-        break;
 
-        case 2: //program 2
-        {
-            printf(" ");
-        }
-        break;
-        case 3: //program 3
-        {
-            printf(" ");
-        }
-        break;
-        case 4: //program 4
-        {
-            printf(" ");
-        }
-        break;
-        default:
-        {
-            if (sum >= 1)
-            {
-                printf("Please check out your order !!\n");
-                printf("You need to clear order for out or check out ??\n");
-                printf("[YES = y] or [NO = n]\n");
+                    printf("------------------------------------\n");
+                    txtcolor(12, 0);
+                    printf("!! Check out your order !! \n");
+                    printf("if you need to quit please clear your order.\n");
+                    resetc();
+                    printf("------------------------------------\n");
+                    printf("Clear orders[y] or Continuous shoping[n] : "); 
+                    do
+                    {
+                    scanf("%c",&clear); //strlwr(clear);
+                        if (clear == 'y') 
+                        {
+                            sum = 0; i = 0;
+                        }
+                        /*else 
+                            printf("input again");*/ //เพิ่มกรณีใส่ตัวอักษรผิด
+                    }while(clear != 'y' && clear != 'n'); //strcmp(clear,'y') && strcmp(clear,'n')
+                }
+                else if (sum == 0){
+                    saygoodbye();
+                    exit(0);}
             }
-            else if (sum == 0)
-            {
-            saygoodbye();
-            exit(0);}
         }
-        }
-    } while (5);
+    }while (5);
 }
 
 void saygoodbye()
