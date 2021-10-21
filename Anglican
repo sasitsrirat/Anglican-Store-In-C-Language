@@ -4,35 +4,18 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <time.h>
-void txtcolor(int txt, int back)
-{
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), back * 16 + txt);
-}
-void resetc(void)
-{
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-}
-void saygoodbye();
-void load(int l)
-{
-    int i;
 
-    printf("\n\n\t--------------LOADING--------------\n");
-    printf("\t___________________________________\n\n");
-    printf("\t");
-    for (i = 0; i < l; i++)
-    {
-        txtcolor(0,20);
-        printf(" "); //showspaceinloading
-        resetc();    //anticolorofloading
-    }
-    printf("\n\t___________________________________\n");
-}
+void txtcolor(int txt, int back);
+void resetc(void);
+void saygoodbye();
+void load(int l);
 void main()
 {
     char username[50];
-    int program, order, sum = 0, i = 0,checkpassword,check;
-    char clear = {0} ;
+    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0;
+    int debitnumber;
+    char clear = {0};
+    char address[100];
 
     struct customer
     {
@@ -44,19 +27,21 @@ void main()
     for (int countload = 0; countload < 36; countload++) //lengthofloading
     {
         load(countload);
-        Sleep(50); //timeofloading
+        Sleep(2); //timeofloading
         system("cls");
     }
 
     FILE *pt;
     pt = fopen("user.txt","a+");
-    
-    printf("Enter Username : "); scanf("%[^\n]",username);
 
-    while(!feof(pt))
+    printf("Enter Username : ");
+    fflush(stdin);
+    gets(username); //scanf("%[^\n]",username);
+
+    while(!feof(pt)) //check user.txt
     {
         fscanf(pt,"%s%d%d",ct.name,&ct.password,&ct.debit);
-        if (strcmp(ct.name,username)==0) //if name & username math
+        if (strcmp(ct.name,username)==0 && check !=1)
         {
             printf("----------------------------------------");
             printf("\n\tWellcome Back!! %s",ct.name);
@@ -65,18 +50,18 @@ void main()
 
             do{
                 printf("\nEnter password : "); scanf("%d",&checkpassword);
-                if(checkpassword==ct.password) break;
+                if(checkpassword==ct.password) break; //หลุดลูป
                 if(checkpassword != ct.password)
                 {
                     printf("-----------------------------------------------");
                     printf("\n Wrong password Please Enter password again!");
-                    printf("\n-----------------------------------------------");    
+                    printf("\n-----------------------------------------------");
                 }
             }while(checkpassword != ct.password);
         }
     }
 
-    if(check==0)
+    if(check==0) //if new user
     {
         printf("---------------------------");
         printf("\n== Wellcome to our shop ==");
@@ -85,28 +70,36 @@ void main()
     }
     system("cls");
     srand(time(NULL));
-    printf("------------------------------------\n");
-    printf("WELCOME TO PROTECTORS ORGANIZATIONS\n");
-    printf("------------------------------------\n");
+    printf("---------------------------------------\n");
+    printf(" WELCOME TO PROTECTORS ORGANIZATIONS \n");
+    printf("---------------------------------------\n");
 
     //start programs
     do
-    {   printf("Number of your order : %d \n", i);
-        printf("Cost : %d \n", sum);
+    {
+        //showontop
+        printf("=======================================\n");
+        txtcolor(15,5);
+        printf(" Number of your order : %5d PIECE    \n",i);
+        printf(" Cost : %5d THB                      \n",sum);
+        resetc();
+        printf("=======================================\n");
+        //showontop
         printf("------------------------------------\n");
         printf("           Name of programs         \n");
         printf("------------------------------------\n");
         printf("\n|          Anglican Shop         1 |\n"); // ร้านขายของของ
-        printf("|          Corpserve             2 |\n");   // รับศพไร้ญาติ
+        printf("|             Corpserve          2 |\n");   // รับศพไร้ญาติ
         printf("|          Church Delivery       3 |\n");   // บริการจองรถขนศพ
         printf("|          High-Low Heresy       4 |\n");   //คำนวนบุญบาป
-        printf("|          Exit program          5 |\n");   //คำนวนบุญบาป
+        printf("|           Payment Method       5 |\n");   //จ่าบเงินและส่งของ
+        printf("|           Exit program         6 |\n");   //เข็คยอดชำระและจัดส่ง
 
         do
         {
             printf("Select programs by press number : ");
             scanf("%d", &program);
-            if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5)
+            if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 5)
             {
                 printf("----------------------------------------------------------------------------\n");
                 txtcolor(12, 0);
@@ -114,7 +107,7 @@ void main()
                 resetc();
                 printf("----------------------------------------------------------------------------\n");
             }
-        } while (program != 1 && program != 2 && program != 3 && program != 4 && program != 5);
+        } while (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 6);
 
         switch (program)
         {
@@ -122,9 +115,8 @@ void main()
             {
                 do
                 {
-                    resetc();
                     printf("\n----------------------------------------------------------------------------\n");
-                    txtcolor(14, 0);
+                    txtcolor(2,0);
                     printf("   + Anglican Shop\n");
                     resetc();
                     printf("   1 Holy water             150THB\n");
@@ -160,8 +152,11 @@ void main()
                         case 6: sum = 0; i = 0; i--; break;
                     } i++;
                     system("cls");
-                    printf("Number of your order : %d \n", i);
-                    printf("Cost : %d \n", sum);
+                    txtcolor(15,5);
+                    printf("Number of your order : %5d PIECE         \n", i);
+                    printf("Cost : %5d THB                           \n", sum);
+                    resetc();
+
                 } while (order != 0); //หลุดloopcase1
                 system("cls");
             }break;
@@ -177,6 +172,130 @@ void main()
             case 4: //program 4
             {
                 printf(" ");
+            }break;
+            case 5 :
+            {
+                printf("-----------------------------------\n");
+                printf("Number of your order : %d PIECE         \n",i);
+                printf("Cost : %dTHB                            \n",sum);
+                printf("-----------------------------------\n");
+                printf("Please select payment method \n");
+                printf("--> Debit Card         [1]\n");
+                printf("--> Bank Transfer      [2]\n");
+                printf("--> Cash on delivery   [3]\n");
+                printf("--> Back to menu       [4]\n");
+                do //check method input
+                {
+                    printf("Select number : "); scanf("%d",&method);
+                    if ((method != 1) && (method != 2) && (method != 3) && (method != 4))
+                    {
+                        printf("Error!! Please try again \n");
+                    }
+                } while (method != 1 && method != 2 && method != 3 && method != 4);
+
+                if (method == 1)
+                {
+                    if (ct.debit == 0 )
+                    {
+                        do
+                        {
+                            printf("Enter card number : "); scanf("%d",&debitnumber);
+                            if(debitnumber>=9999)
+                            {
+                                printf("\nError!");
+                            }
+                        } while (debitnumber >= 9999);
+                        if(check == 0)
+                        {
+                            fprintf(pt,"\n%s %d %d",username,checkpassword,debitnumber);
+                        }
+                        sum = 0; i = 0;
+                    }
+                    else
+                    {
+                        txtcolor(11,0);
+                        printf("\n++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        printf("\n++                                              ++");
+                        printf("\n++ Your Debit Card Number %04d              ++",ct.debit);
+                        printf("\n++                                              ++");
+                        printf("\n++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        resetc();
+                        printf("\n\n Enter for continue purchasing.....");
+                        getch();
+                    }
+                    mem = 1;
+                }
+
+                else if (method == 2) //method 2
+                {
+                    printf("\nPlease transfer money to this account : ");
+                    txtcolor(11,0);
+                    printf("\n----------------------------------------------");
+                    printf("\n-- BANGKOK BANK                             --");
+                    printf("\n-- Account Number : 1234 1111 2222 1111     --");
+                    printf("\n-- Mr.Computer EGCO111                      --");
+                    printf("\n----------------------------------------------");
+                    resetc();
+                    printf("\n\nSent payment slip to our E-mail or Line application");
+                    printf("\nAfter you sent Payment slip please wait for checking accuracy! \n");
+                    if (check == 0 )
+                    {
+                        fprintf(pt,"\n%s %d 0 0 0 0",username,checkpassword);
+                    }
+                    //add function after 10 min or before ...
+                }
+                else if (method == 3)
+                {
+                    printf("==== Shipping company ====\n");
+                    printf("Kerry Express (+20 THB 1-2 day all Thailand)     -->[1]\n");
+                    printf("Thailand post (+10 THB 3-4 day all Thailand)     -->[2]\n");
+                    printf("Anglican parcel (+5 THB 5-7 days all Thailand)   -->[3]\n");
+                    do{
+                        printf("Select your shipping company : "); scanf("%d",&transport);
+                        if (transport != 1 && transport != 2 && transport != 3)
+                            {
+                                printf("------------------------------------------------------------------------\n");
+                                txtcolor(12,0);
+                                printf("                    Error!!! Please try again \n");
+                                resetc();
+                                printf("------------------------------------------------------------------------\n");
+                            }
+                    }while(transport != 1 && transport != 2 && transport != 3);
+                    mem = 2;
+                    switch(transport){
+                        case 1 : sum += 20; break;
+                        case 2 : sum += 10; break;
+                        case 3 : sum += 5;  break;
+                    }
+                    system("cls");
+                    /*if (transport == 1 || transport == 2 || transport == 3)
+                    {
+                        printf("please put your address : ");
+                        fflush(stdin);
+                        gets(address);
+                        printf("----------------------------------------------------------------------------\n");
+                        printf("Your track number is EA%d%d0TH \n",rand()% 99999,rand()% 99999);
+                        printf("We will sent goods at Your address : %s \n",address);
+                        printf("----------------------------------------------------------------------------\n");
+                        printf("please press enter"); getchar();
+                    }*/
+                }
+                if (mem == 1 || mem == 2)
+                {
+                    printf("please put your address : ");
+                    fflush(stdin);
+                    gets(address);
+                    printf("----------------------------------------------------------------------------\n");
+                    printf("Your track number is EA%d%d0TH \n",rand()% 99999,rand()% 99999);
+                    printf("We will sent goods at Your address : %s\n",address);
+                    printf("----------------------------------------------------------------------------\n");
+                    printf("please press Enter button"); getchar();
+                    sum = 0; i = 0;
+                }
+                else
+
+                    fclose(pt);
+                    system("cls");
             }break;
             default:
             {
@@ -196,9 +315,10 @@ void main()
                         {
                             sum = 0; i = 0;
                         }
-                        if (clear != 'y'){
+                        /*/if (clear != "y")
+                        {
                             printf("Error!! input again : ");
-                        }
+                        }*/
                     }while(clear != 'y' && clear != 'n');
                     system("cls");
                 }
@@ -216,4 +336,27 @@ void saygoodbye()
     printf("         === >GOODBYE < ===         \n");
     printf("              > ^-^ <               \n");
     printf("------------------------------------\n");
+}
+void load(int l)
+{
+    int i;
+
+    printf("\n\n\t--------------LOADING--------------\n");
+    printf("\t___________________________________\n\n");
+    printf("\t");
+    for (i = 0; i < l; i++)
+    {
+        txtcolor(0,20);
+        printf(" "); //showspaceinloading
+        resetc();
+    }
+    printf("\n\t___________________________________\n");
+}
+void txtcolor(int txt, int back)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), back * 16 + txt);
+}
+void resetc(void)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 }
