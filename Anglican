@@ -22,22 +22,24 @@ void load(int l)
     printf("\t");
     for (i = 0; i < l; i++)
     {
-        txtcolor(0, 20);
-        printf(" "); //spaceinloading
+        txtcolor(0,20);
+        printf(" "); //showspaceinloading
         resetc();    //anticolorofloading
     }
     printf("\n\t___________________________________\n");
 }
 void main()
 {
-    //system("COLOR 9E");
-    printf("#######################################\n");
-    printf("#######################################\n");
+    char username[50];
+    int program, order, sum = 0, i = 0,checkpassword,check;
+    char clear = {0} ;
 
-    srand(time(NULL));
-
-    int program, order, sum = 0, i = 0;
-    char clear ; 
+    struct customer
+    {
+        char name[50];
+        int password;
+        int debit;
+    }ct;
 
     for (int countload = 0; countload < 36; countload++) //lengthofloading
     {
@@ -45,10 +47,48 @@ void main()
         Sleep(50); //timeofloading
         system("cls");
     }
+
+    FILE *pt;
+    pt = fopen("user.txt","a+");
+    
+    printf("Enter Username : "); scanf("%[^\n]",username);
+
+    while(!feof(pt))
+    {
+        fscanf(pt,"%s%d%d",ct.name,&ct.password,&ct.debit);
+        if (strcmp(ct.name,username)==0) //if name & username math
+        {
+            printf("----------------------------------------");
+            printf("\n\tWellcome Back!! %s",ct.name);
+            printf("\n----------------------------------------");
+            check = 1;
+
+            do{
+                printf("\nEnter password : "); scanf("%d",&checkpassword);
+                if(checkpassword==ct.password) break;
+                if(checkpassword != ct.password)
+                {
+                    printf("-----------------------------------------------");
+                    printf("\n Wrong password Please Enter password again!");
+                    printf("\n-----------------------------------------------");    
+                }
+            }while(checkpassword != ct.password);
+        }
+    }
+
+    if(check==0)
+    {
+        printf("---------------------------");
+        printf("\n== Wellcome to our shop ==");
+        printf("\nEnter you new password (4 Number Only): ");
+        scanf("%d",&checkpassword);
+    }
+    system("cls");
+    srand(time(NULL));
     printf("------------------------------------\n");
     printf("WELCOME TO PROTECTORS ORGANIZATIONS\n");
     printf("------------------------------------\n");
-    
+
     //start programs
     do
     {   printf("Number of your order : %d \n", i);
@@ -81,7 +121,7 @@ void main()
             case 1:
             {
                 do
-                {  
+                {
                     resetc();
                     printf("\n----------------------------------------------------------------------------\n");
                     txtcolor(14, 0);
@@ -142,24 +182,24 @@ void main()
             {
                 if (sum >= 10)
                 {
-
                     printf("------------------------------------\n");
                     txtcolor(12, 0);
                     printf("!! Check out your order !! \n");
                     printf("if you need to quit please clear your order.\n");
                     resetc();
                     printf("------------------------------------\n");
-                    printf("Clear orders[y] or Continuous shoping[n] : "); 
+                    printf("Clear orders[y] or Continuous shoping[n] : ");
                     do
                     {
                     scanf("%c",&clear); //strlwr(clear);
-                        if (clear == 'y') 
+                        if (clear == 'y')
                         {
                             sum = 0; i = 0;
                         }
-                        /*else 
-                            printf("input again");*/ //เพิ่มกรณีใส่ตัวอักษรผิด
-                    }while(clear != 'y' && clear != 'n'); //strcmp(clear,'y') && strcmp(clear,'n')
+                        if (clear != 'y'){
+                            printf("Error!! input again : ");
+                        }
+                    }while(clear != 'y' && clear != 'n');
                     system("cls");
                 }
                 else if (sum == 0){
