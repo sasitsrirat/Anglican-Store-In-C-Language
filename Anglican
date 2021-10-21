@@ -93,7 +93,7 @@ void main()
         printf("|          Church Delivery       3 |\n");   // บริการจองรถขนศพ
         printf("|          High-Low Heresy       4 |\n");   //คำนวนบุญบาป
         printf("|           Payment Method       5 |\n");   //จ่าบเงินและส่งของ
-        printf("|           Exit program         6 |\n");   //เข็คยอดชำระและจัดส่ง
+        printf("|           Exit program         6 |\n");   
 
         do
         {
@@ -191,7 +191,11 @@ void main()
                     {
                         printf("Error!! Please try again \n");
                     }
-                } while (method != 1 && method != 2 && method != 3 && method != 4);
+                    else if (sum == 0 || i == 0)
+                    {
+                        printf("You don't need to pay anything \n");
+                    }
+                } while ((method != 1 && method != 2 && method != 3 && method != 4),(sum == 0 && method != 4));
 
                 if (method == 1)
                 {
@@ -293,7 +297,6 @@ void main()
                     sum = 0; i = 0;
                 }
                 else
-
                     fclose(pt);
                     system("cls");
             }break;
