@@ -51,7 +51,8 @@ void main()
     
     //start programs
     do
-    {
+    {   printf("Number of your order : %d \n", i);
+        printf("Cost : %d \n", sum);
         printf("------------------------------------\n");
         printf("           Name of programs         \n");
         printf("------------------------------------\n");
@@ -122,6 +123,7 @@ void main()
                     printf("Number of your order : %d \n", i);
                     printf("Cost : %d \n", sum);
                 } while (order != 0); //หลุดloopcase1
+                system("cls");
             }break;
 
             case 2: //program 2
@@ -158,6 +160,7 @@ void main()
                         /*else 
                             printf("input again");*/ //เพิ่มกรณีใส่ตัวอักษรผิด
                     }while(clear != 'y' && clear != 'n'); //strcmp(clear,'y') && strcmp(clear,'n')
+                    system("cls");
                 }
                 else if (sum == 0){
                     saygoodbye();
