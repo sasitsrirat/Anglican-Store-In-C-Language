@@ -83,7 +83,7 @@ void main()
     do
     {
         //showontop
-        //printf("%d check",check);
+        printf("%d check",check);
         printf("=======================================\n");
         txtcolor(15,5);
         printf(" Number of your order : %5d PIECE    \n",i);
@@ -206,7 +206,7 @@ void main()
 
                 if (method == 1)
                 {
-                    if ((ct.db1 == 0) || (ct.db2 == 0) || (ct.db3 == 0) || (ct.db4 == 0))
+                    if (check == 0) //((ct.db1 == 0) || (ct.db2 == 0) || (ct.db3 == 0) || (ct.db4 == 0))
                     {
                         do
                         {
@@ -218,8 +218,8 @@ void main()
                             }
                         } while (debit1>=9999 || debit2>=9999 || debit3>=9999 || debit4>=9999);
 
-                        if(check == 0) //new member
-                            fprintf(pt,"\n%s %d %d %d %d %d", username, checkpassword, debit1, debit2, debit3, debit4);
+                        //if(check == 0) //new member
+                        fprintf(pt,"\n%s %d %d %d %d %d", username, checkpassword, debit1, debit2, debit3, debit4);
                         sum = 0; i = 0;
                     }
                     else // odd member
