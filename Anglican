@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "anglicanfunction.c"
+#define BETWEEN(value, min, max) (value < max && value > min)
 
 void main()
 {
@@ -83,11 +84,14 @@ void main()
     do
     {
         //showontop
-        printf("%d check",check);
+        //printf("%d check",check);
         printf("=======================================\n");
-        txtcolor(15,5);
-        printf(" Number of your order : %5d PIECE    \n",i);
-        printf(" Cost : %5d THB                      \n",sum);
+        txtcolor(15,0);
+        time_t rawtime; time(&rawtime);
+        printf(" %s",ctime(&rawtime)); //ctime(&rawtime)
+        printf("|| Good Morning : %s              ||\n",username);
+        printf("|| Your order : %5d PIECE          ||\n",i);
+        printf("|| Cost       : %5d THB            ||\n",sum);
         resetc();
         printf("=======================================\n");
         //showontop
@@ -98,7 +102,7 @@ void main()
         printf("|             Corpserve          [2] |\n");   // รับศพไร้ญาติ
         printf("|          Church Delivery       [3] |\n");   // บริการจองรถขนศพ
         printf("|          High-Low Heresy       [4] |\n");   //คำนวนบุญบาป
-        printf("|           Payment Method       [5] |\n");   //จ่าบเงินและส่งของ
+        printf("|           Payment Method       [5] |\n");   //จ่ายเงินและส่งของ
         printf("|           Exit program         [6] |\n");
 
         do
@@ -193,12 +197,12 @@ void main()
                 printf("--> Back to menu       [4]\n");
                 do //check method input
                 {
-                    printf("Select number : "); scanf("%d",&method);
+                    printf("Select number : "); scanf("%d",&method); // method = getche(); //getch not show but getche will show 
                     if ((method != 1) && (method != 2) && (method != 3) && (method != 4))
                     {
                         printf("Error!! Please try again \n");
                     }
-                    else if (sum == 0 || i == 0)
+                    else if ((sum == 0) || (i == 0))
                     {
                         printf("You don't need to pay anything \n");
                     }
@@ -212,7 +216,7 @@ void main()
                         {
                             printf("Enter card number (0000 0000 0000 0000) : ");
                             scanf("%d %d %d %d",&debit1, &debit2, &debit3, &debit4);
-                            if(debit1>= 9999 || debit2>= 9999 || debit3>= 9999 || debit4>= 9999)
+                            if(debit1  || debit2>= 9999 || debit3>= 9999 || debit4>= 9999)
                             {
                                 printf("\nError!");
                             }
@@ -323,6 +327,6 @@ void main()
                     exit(0);}
             }
         }
-    }while (5);
+    }while (program != 6);
 }
 
