@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "anglicanfunction.c"
-#define BETWEEN(value, min, max) (value < max && value > min)
+#include "hlheresy.c"
 
 void main()
 {
@@ -21,6 +21,7 @@ void main()
         int password;
         int db1,db2,db3,db4;
     }ct;
+    //struct customer ct; //version post variable
 
     for (int countload = 0; countload < 36; countload++) //lengthofloading
     {
@@ -102,7 +103,7 @@ void main()
         printf("|             Corpserve          [2] |\n");   // รับศพไร้ญาติ
         printf("|          Church Delivery       [3] |\n");   // บริการจองรถขนศพ
         printf("|          High-Low Heresy       [4] |\n");   //คำนวนบุญบาป
-        printf("|           Payment Method       [5] |\n");   //จ่ายเงินและส่งของ
+        printf("|           Payment Method       [5] |\n");   //จ่าบเงินและส่งของ
         printf("|           Exit program         [6] |\n");
 
         do
@@ -121,7 +122,8 @@ void main()
 
         switch (program)
         {
-            case 1:
+            case 1: //anglicanshop
+                bookmark1:
             {
                 do
                 {
@@ -138,6 +140,7 @@ void main()
                     txtcolor(12, 0);
                     printf("   0 Back\n");
                     resetc();
+                    //shopmenu();
 
                     do
                     {
@@ -178,11 +181,106 @@ void main()
             }break;
             case 3: //program 3
             {
-                printf(" ");
+                 do
+                {
+                    system("cls");
+                    printf("====================================== WELCOME TO Church Delivery ======================================\n\n");
+                    printf("                                        [1]=> Booking Delivery                       \n");
+                    txtcolor(12, 0);
+                    printf("                                        [0]=> Back to main menu                       \n");
+                    resetc();
+
+                    do
+                    {
+                        printf("\nSelect your service : ");
+                        scanf("%d", &order);
+                        if (order != 0 && order != 1 && order != 2)
+                        {
+                            txtcolor(12, 0);
+                            printf("--->Error !!! Please try again<---\n");
+                            resetc();
+                        }
+                    } while (order != 0 && order != 1 && order != 2 );
+
+                    system("cls");
+                    printf("=======================================\n");
+                    txtcolor(15,5);
+                    printf(" Number of your order : %5d PIECE    \n",i);
+                    printf(" Cost : %5d THB                      \n",sum);
+                    resetc();
+                    printf("=======================================\n");
+
+                    switch (order)
+                    {
+                        case 0: i--; break;
+                        case 1:
+                        {
+                            printf("======================================================================\n");
+                            printf("                    List of regions   \n");
+                            printf("          **We will get your address in Payment Method**   \n");
+                            printf("======================================================================\n\n");
+                            printf("|                      Bangkok               [1] |\n");
+                            printf("|                   Middle and East          [2] |\n");
+                            printf("|                     Northeast              [3] |\n");
+                            printf("|                       North                [4] |\n");
+                            printf("|                       South                [5] |\n");
+                            printf("|                                   Reset => [6] |\n");
+                            printf("|                                    Back => [0] |\n");
+                            resetc();
+                            do
+                            {
+                                printf("\nWhere do you want our service : ");
+                                scanf("%d", &order);
+                                if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
+                                {
+                                    txtcolor(12, 0);
+                                    printf("--->Error !!! Please try again<---\n");
+                                    resetc();
+                                }
+                            } while (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6);
+
+                            switch (order)
+                            {
+                                case 0: i--; break;
+                                case 1: sum += 1000; break;
+                                case 2: sum += 1500; break;
+                                case 3: sum += 2500; break;
+                                case 4: sum += 2500; break;
+                                case 5: sum += 2500; break;
+                                case 6: sum = 0; i = 0; i--; break;
+                            }
+                            i++;
+
+                        }
+                    }
+                    system("cls");
+                    printf("********************************************************************************************************\n");
+                    printf("                                       Thank You for selected our service                          \n");
+                    printf("                                      Do you want to change your selection??                        \n\n");
+                    printf("                              [1] No.           [2] Yes, I want to change my selection.             \n\n");
+
+                    do
+                    {
+                        printf("\nSelect your order : ");
+                        scanf("%d", &order);
+                        if (order != 1 && order != 2 )
+                        {
+                            txtcolor(12, 0);
+                            printf("--->Error !!! Please try again<--- \n");
+                            resetc();
+                        }
+                    } while ( order != 1 && order != 2 );
+                    if (order == 1) break;
+                    else if (order == 2) printf("----------"); resetc();
+                } while (order != 0);
+                system("cls");
             }break;
-            case 4: //program 4
+            case 4: //High-Low Heresy
             {
-                printf(" ");
+                if(heresy() == 1)
+                {
+                    goto bookmark1;
+                }
             }break;
             case 5 :
             {
@@ -197,7 +295,7 @@ void main()
                 printf("--> Back to menu       [4]\n");
                 do //check method input
                 {
-                    printf("Select number : "); scanf("%d",&method); // method = getche(); //getch not show but getche will show 
+                    printf("Select number : "); scanf("%d",&method); // method = getche(); //getch not show but getche will show
                     if ((method != 1) && (method != 2) && (method != 3) && (method != 4))
                     {
                         printf("Error!! Please try again \n");
@@ -314,7 +412,7 @@ void main()
                     printf("Clear orders[y] or Continuous shoping[n] : ");
                     do
                     {
-                    scanf("%c",&clear); //strlwr(clear);
+                        scanf("%c",&clear); //strlwr(clear);
                         if (clear == 'y')
                         {
                             sum = 0; i = 0;
@@ -322,11 +420,13 @@ void main()
                     }while(clear != 'y' && clear != 'n');
                     system("cls");
                 }
-                else if (sum == 0){
+                else if (sum == 0)
+                {
                     saygoodbye();
-                    exit(0);}
+                    exit(0);
+                }
             }
         }
-    }while (program != 6);
+    }while (5);
 }
 
