@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <time.h>
-#include <ctype.h> //music
+#include <ctype.h>
 #include "anglicanfunction.c"
 #include "hlheresy.c"
 
@@ -26,7 +26,7 @@ typedef struct
 void main()
 {
     char username[50];
-    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,checkprogram3=0,mem2=0;
+    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0;
     int debit1, debit2, debit3, debit4;
     char clear;
     char address[100];
@@ -55,7 +55,9 @@ void main()
         if (strcmp(ct.name,username)==0 && check !=1)
         {
             printf("----------------------------------------\n");
+            txtcolor(10, 0);
             printf("     Wellcome Back!! %s\n",ct.name);
+            resetc();
             printf("----------------------------------------\n");
             check = 1;
 
@@ -80,28 +82,24 @@ void main()
         scanf("%d",&checkpassword);
     }
     system("cls");
-
-    //srand(time(NULL));
-    printf("===============================================================\n");
-    txtcolor(10,0);
-    printf("  _   _   _ ___ _  _ ___ _   _   __ \n");
-    printf(" |_) |_) / \\ | |_ /   | / \\ |_) (_  \n");
-    printf(" |_  |_\\ \\_/ | |_ \\_  |___/__ \\ __)___ __  _        __\n");
-    printf(" / \\ |_) /__  /\\  |\\ |  |   /  /\\  |   |  / \\ |\\ | (_   \n");
-    printf(" \\_/ | \\ \\_| /--\\ | \\| _|_ /_ /--\\ |  _|_ \\_/ | \\| __) \n");
-    resetc();
-    printf("\n");
-    printf("===============================================================\n");
-
     //start main programs
     do
     {
         //showontop
+        printf("-----------------------------------------------------------\n");
+        txtcolor(14,0);
+        printf("|  _   _   _ ___ _  _ ___ _   _   __                      |\n");
+        printf("| |_) |_) / \\ | |_ /   | / \\ |_) (_                       |\n");
+        printf("| |_  |_\\ \\_/ | |_ \\_  |___/__ \\ __)___ __  _        __   |\n");
+        printf("| / \\ |_) /__  /\\  |\\ |  |   /  /\\  |   |  / \\ |\\ | (_    |\n");
+        printf("| \\_/ | \\ \\_| /--\\ | \\| _|_ /_ /--\\ |  _|_ \\_/ | \\| __)   |\n\n");
+        resetc();
+        printf("-----------------------------------------------------------\n");
         printf("=======================================\n");
         txtcolor(15,0);
         time_t rawtime; time(&rawtime);
-        printf(" %s",ctime(&rawtime)); //ctime(&rawtime)
-        printf("|| Good Morning : %s              ||\n",username);
+        printf("   %s",ctime(&rawtime)); //ctime(&rawtime)gotoxy(2,9);
+        printf("|| Username : %10s             ||\n",username);
         printf("|| Your order : %5d Orders         ||\n",i);
         printf("|| Cost       : %5d THB            ||\n",sum);
         resetc();
@@ -119,15 +117,14 @@ void main()
 
         do
         {
-            printf("Select programs by press number : ");
-            scanf("%d", &program);
+            printf("\nSelect programs by press number : "); scanf("%d", &program);
             if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 5 && program != 6)
             {
-                printf("----------------------------------------------------------------------------\n");
+                printf("---------------------------------------\n");
                 txtcolor(12, 0);
-                printf("                    Error!!! Please try again \n");
+                printf(" !!!Error!!! Please try again %d\n",program);
                 resetc();
-                printf("----------------------------------------------------------------------------\n");
+                printf("---------------------------------------\n");
             }
         } while (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 6);
 
@@ -148,7 +145,7 @@ void main()
                     txtcolor(2,0);
                     printf("   + Anglican Shop");
                     resetc();
-                    printf("\n------------------------------------------------\n");
+                    printf("\n---------------------------------------\n");
                     printf("   -- List of item   \n");
                     printf("   [1] Holy water             150THB\n");
                     printf("   [2] Gun of heaven          990THB\n");
@@ -167,9 +164,11 @@ void main()
                         scanf("%d", &order);
                         if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
                         {
+                            printf("---------------------------------------\n");
                             txtcolor(12, 0);
-                            printf("--->Error !!! Please try again<--- \n");
+                            printf(" !!!Error!!! Please try again \n");
                             resetc();
+                            printf("---------------------------------------\n");
                         }
                     } while (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6);
 
@@ -187,11 +186,59 @@ void main()
                 system("cls");
             }break;
 
-            case 2: //program 2
+            case 2: //Corpserve
             {
-                printf(" ");
+                do
+                {
+
+                system("cls");
+                txtcolor(14,0);
+                printf("============================\n");
+                printf("||                        ||\n");
+                printf("||  Welcome to corpserve  ||\n");
+                printf("||                        ||\n");
+                printf("============================\n");
+                resetc();
+
+
+                printf("\n");
+                printf("Input Corpse position : ");
+                fflush(stdin);
+                gets(data.pos);
+                printf("---------------------------\n");
+
+
+                printf("Input the deceased name in English : ");
+                fflush(stdin);
+                gets(data.name);
+                printf("---------------------------\n");
+
+                printf("Input the deceased data : ");
+                fflush(stdin);
+                gets(data.htr);
+
+                printf("---------------------------\n");
+                system("cls");
+                printf("corpse position : %s \n",data.pos);
+                printf("deceased name   : %s\n",data.name);
+                printf("deceasd data    : %s\n\n",data.htr);
+                printf("Do you want to change your details \nYes press [1]  No press [0]\n:");
+                fflush(stdin);
+                scanf("%d",&switch1);
+                    if(switch1==0)
+                    {
+                        printf("---------------------------------\n");
+                        txtcolor(14,0);
+                        printf("we will pick up the corpse soon\n");
+                        resetc();
+                        printf("---------------------------------\n");
+                        printf("\nEnter to exit this text .....\n");
+                        getch();
+                        break;
+                    }
+                }while(1);
             }break;
-            case 3: //program 3
+            case 3: //Church Delivery
             {
                 do
                 {
@@ -204,30 +251,31 @@ void main()
                     printf("=======================================");
                     printf("\n------------------------------------------------\n");
                     printf("================================================\n");
-                    printf("** We will get your address in Payment Method ** \n");
+                    printf("** We will get your address in Payment Method **\n");
                     printf("================================================\n");
                     txtcolor(2,0);
                     printf("   + Church Delivery");
                     resetc();
                     printf("\n------------------------------------------------\n");
                     printf("    -- List of regions   \n");
-                    printf("    Bangkok           [1] \n");
-                    printf("    Middle and East   [2] \n");
-                    printf("    Northeast         [3] \n");
-                    printf("    North             [4] \n");
-                    printf("    South             [5] \n");
+                    printf("    Bangkok         --> 1000 ฿  [1] \n");
+                    printf("    Middle and East --> 1500 ฿  [2] \n");
+                    printf("    Northeast       --> 2500 ฿  [3] \n");
+                    printf("    North           --> 2500 ฿  [4] \n");
+                    printf("    South           --> 2500 ฿  [5] \n");
                     printf("             Reset => [6] \n");
                     printf("              Back => [0] \n");
 
                     do
                     {
-                        printf("\nWhere do you want our service : ");
-                        scanf("%d", &order);
+                        printf("\nWhere do you want our service : "); scanf("%d", &order);
                         if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
                         {
+                            printf("---------------------------------------\n");
                             txtcolor(12, 0);
-                            printf("--->Error !!! Please try again<---\n");
+                            printf(" !!!Error!!! Please try again \n");
                             resetc();
+                            printf("---------------------------------------\n");
                         }
                     } while (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6);
 
@@ -240,7 +288,8 @@ void main()
                         case 4: sum += 2500; break;
                         case 5: sum += 2500; break;
                         case 6: sum = 0; i = 0; i--; break;
-                    } i++;
+                    } i++; p3 = 1;
+
                 } while (order != 0);
                 system("cls");
             }break;
@@ -253,6 +302,7 @@ void main()
             }break;
             case 5 : //payment
             {
+                system("cls");
                 printf("-----------------------------------\n");
                 printf("Number of your order : %d Orders        \n",i);
                 printf("Cost : %dTHB                            \n",sum);
@@ -268,11 +318,20 @@ void main()
                     printf("Select number : "); scanf("%d",&method); // method = getche(); //getch not show but getche will show
                     if ((method != 1) && (method != 2) && (method != 3) && (method != 4))
                     {
-                        printf("Error!! Please try again \n");
+                        printf("---------------------------------------\n");
+                        txtcolor(12, 0);
+                        printf(" !!!Error!!! Please try again \n");
+                        resetc();
+                        printf("---------------------------------------\n");
                     }
                     else if ((sum == 0) || (i == 0))
                     {
+                        printf("---------------------------------------\n");
+                        txtcolor(12, 0);
                         printf("You don't need to pay anything \n");
+                        resetc();
+                        printf("---------------------------------------\n");
+
                     }
                 } while ((method != 1 && method != 2 && method != 3 && method != 4),(sum == 0 && method != 4 ));
 
@@ -284,29 +343,29 @@ void main()
                         {
                             printf("Enter card number (0000 0000 0000 0000) : ");
                             scanf("%d %d %d %d",&debit1, &debit2, &debit3, &debit4);
-                            if(debit1  || debit2>= 9999 || debit3>= 9999 || debit4>= 9999)
+                            if(debit1>=9999 || debit2>= 9999 || debit3>= 9999 || debit4>= 9999)
                             {
                                 printf("\nError!");
                             }
                         } while (debit1>=9999 || debit2>=9999 || debit3>=9999 || debit4>=9999);
-
-                        //if(check == 0) //new member
                         fprintf(pt,"\n%s %d %d %d %d %d", username, checkpassword, debit1, debit2, debit3, debit4);
-                        sum = 0; i = 0;
+
                     }
                     else // odd member
                     {
                         txtcolor(11,0);
                         printf("\n++++++++++++++++++++++++++++++++++++++++++++++++++++");
                         printf("\n++                                                ++");
-                        printf("\n++ Your Debit Card Number %04d %04d %04d %04d     ++",ct.db1, ct.db2, ct.db3, ct.db4);
+                        printf("\n++ Your Debit Card Number %04d %04d %04d %04d     ++",ct.db1,ct.db2,ct.db3,ct.db4);
                         printf("\n++                                                ++");
                         printf("\n++++++++++++++++++++++++++++++++++++++++++++++++++++");
                         resetc();
-                        printf("\n\n Enter for continue purchasing.....\n");
+                        printf("\n\nEnter for continue purchasing.....\n");
                         getch();
+
                     }
-                    mem = 1;
+                    if (p3 == 1) { mem2 = 1;}
+                    else mem = 1;
                 }
 
                 else if (method == 2) //method 2
@@ -323,40 +382,52 @@ void main()
 
                     if (check == 0)
                     {
-                        fprintf(pt, "\n%s %d 0 0 0 0", username, checkpassword);
+                        fprintf(pt, "\n%s %d 0 0 0 0", username, checkpassword); //if new user just keep username and pass
                     }
                     //add function after 10 min or before ...
                 }
                 else if (method == 3)
                 {
-                    printf("-----------------------------------\n");
-                    printf("==== Shipping company ====\n");
-                    txtcolor(4,0);
-                    printf("**If you select Church Delivery we will sent death certificate for you**\n");
-                    resetc();
-                    printf("1 Kerry Express     ( +20 THB 1-2 day all Thailand )   -->[1]\n");
-                    printf("2 Thailand post     ( +10 THB 3-4 day all Thailand )   -->[2]\n");
-                    printf("3 Anglican parcel   ( +5 THB 5-7 days all Thailand )   -->[3]\n");
-                    do{
-                        printf("Select your shipping company : "); scanf("%d",&transport);
-                        if (transport != 1 && transport != 2 && transport != 3)
-                            {
-                                printf("------------------------------------------------------------------------\n");
-                                txtcolor(12,0);
-                                printf("                    Error!!! Please try again \n");
-                                resetc();
-                                printf("------------------------------------------------------------------------\n");
-                            }
-                    }while(transport != 1 && transport != 2 && transport != 3);
-                    mem = 2;
-                    switch(transport){
-                        case 1 : sum += 20; break;
-                        case 2 : sum += 10; break;
-                        case 3 : sum += 5;  break;
+                    if (p3 == 1)
+                    {
+                        printf("-------------------------------------------\n");
+                        printf("you can't pay this method \n");
+                        printf("please press Enter button to continuous \n");
+                        printf("-------------------------------------------\n");
+                        getch();
                     }
-                    //system("cls");
+                    else if (mem2 == 0)
+                    {
+                        printf("-----------------------------------\n");
+                        printf("==== Shipping company ====\n");
+                        txtcolor(4,0);
+                        printf("**If you select Church Delivery we will sent death certificate for you**\n");
+                        resetc();
+                        printf("1 Kerry Express     ( +20 THB 1-2 day all Thailand )   -->[1]\n");
+                        printf("2 Thailand post     ( +10 THB 3-4 day all Thailand )   -->[2]\n");
+                        printf("3 Anglican parcel   ( +5 THB 5-7 days all Thailand )   -->[3]\n");
+                        do{
+                            printf("Select your shipping company : "); scanf("%d",&transport);
+                            if (transport != 1 && transport != 2 && transport != 3)
+                                {
+                                    printf("------------------------------------------------------------------------\n");
+                                    txtcolor(12,0);
+                                    printf("                    Error!!! Please try again \n");
+                                    resetc();
+                                    printf("------------------------------------------------------------------------\n");
+                                }
+                        }while(transport != 1 && transport != 2 && transport != 3);
+
+                        switch(transport)
+                        {
+                            case 1 : sum += 20; break;
+                            case 2 : sum += 10; break;
+                            case 3 : sum += 5;  break;
+                        }
+                        mem = 2;
+                    }
                 }
-                if (mem == 1 || mem == 2)
+                if ((mem == 1) || (mem == 2))
                 {
                     printf("please put your address : ");
                     fflush(stdin);
@@ -366,7 +437,18 @@ void main()
                     printf("We will sent goods at Your address : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button"); getchar();
-                    sum = 0; i = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0;
+                }
+                if (mem2 == 1)
+                {
+                    printf("please put your location : ");
+                    fflush(stdin);
+                    gets(address);
+                    printf("----------------------------------------------------------------------------\n");
+                    printf("We will go to your location @ : %s\n",address);
+                    printf("----------------------------------------------------------------------------\n");
+                    printf("please press Enter button for continuous"); getchar();
+                    mem2 = 0; p3 = 0; sum = 0; i = 0;
                 }
                 else
                     fclose(pt);
@@ -402,4 +484,3 @@ void main()
         }
     }while (5);
 }
-
