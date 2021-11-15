@@ -33,3 +33,8 @@ void saygoodbye(void)
     printf("               > ^-^ <               \n");
     printf("------------------------------------\n");
 }
+int random_between(int min, int max)
+{
+    int r = (rand() / (float) RAND_MAX) * (max + 1) + min;
+    return r > max ? max: r;
+}
