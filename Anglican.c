@@ -15,13 +15,6 @@ struct customer
     int db1,db2,db3,db4;
 }ct;
 
-struct gamebonus
-{
-    int ans, secret, count,reward=0;
-    int lo = 0;
-    int up =9 9;
-}gamebonus;
-
 typedef struct
 {
     char name[100];
@@ -39,6 +32,10 @@ void main()
     int d1,d2,d3,d4;
     char clear;
     char address[100];
+
+    //play for discount 
+    int ans, secret, count,reward=0,discount = 0,laps = 0;
+    int lo = 0,up = 99;
 
     information data;
     int numcount,j,k=0,switch1;
@@ -101,7 +98,7 @@ void main()
     do
     {
         //showontop
-        printf("-----------------------------------------------------------\n");
+        printf("\n-----------------------------------------------------------\n");
         txtcolor(14,0);
         printf("|  _   _   _ ___ _  _ ___ _   _   __                      |\n");
         printf("| |_) |_) / \\ | |_ /   | / \\ |_) (_                       |\n");
@@ -128,7 +125,8 @@ void main()
         printf("||   Church Delivery       [3]  ||\n");   // บริการจองรถขนศพ
         printf("||   High-Low Heresy       [4]  ||\n");   //คำนวนบุญบาป
         printf("||   Payment Method        [5]  ||\n");   //จ่าบเงินและส่งของ
-        printf("||   Exit program          [6]  ||\n");
+        printf("||   Play For Discount     [6]  ||\n");
+        printf("||   Exit program          [7]  ||\n");
 
         do
         {
@@ -138,7 +136,7 @@ void main()
             {
                 printf("error\n");
             }
-            if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 5 && program != 6)
+            if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 5 && program != 6 && program != 7)
             {
                 printf("---------------------------------------\n");
                 txtcolor(12, 0);
@@ -146,7 +144,7 @@ void main()
                 resetc();
                 printf("---------------------------------------\n");
             }
-        } while (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 6);
+        } while (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 6 && program != 7);
 
         switch (program)
         {
@@ -422,7 +420,7 @@ void main()
                         {
                             fprintf(pt, "\n%s %d 0 0 0 0", username, checkpassword); //ถ้าลูกค้าใหม่ชำระเงินวิธีนี้จะเก็บ username กับ password ให้
                         }
-                        mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; //reset ตัวแปรทุกตัว
+                        mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0; //reset ตัวแปรทุกตัว
                     }
                     else if (method == 3 && sum > 0)
                     {
@@ -473,10 +471,11 @@ void main()
                     txtcolor(9, 0);
                     printf("EA%d%d0TH \n",rand()% 99999,rand()% 99999);
                     resetc();
+                    printf("Total price is %d THB \n",sum-discount);
                     printf("We will sent goods at Your address : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0;
                 }
                 if (mem2 == 1)
                 {
@@ -484,14 +483,82 @@ void main()
                     fflush(stdin);
                     gets(address);
                     printf("----------------------------------------------------------------------------\n");
+                    printf("Total price is %d THB \n",sum-discount);
                     printf("We will go to your location @ : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button for continuous"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0;
                 }
                 else
                     fclose(pt);
                     system("cls");
+            }break;
+            
+            case 6 :
+            {
+                system("cls");
+                if (laps == 1)
+                {
+                    printf("------------------------------------\n");
+                    printf("You can't play 2 laps/login \n");
+                    printf("please try it again another time :D \n");
+                    printf("------------------------------------\n");
+                    printf("please press Enter button for go back \n"); 
+                    getchar();
+                    break;
+                }
+                
+                srand(time(NULL));
+                secret = rand()%100;
+
+                printf("*****************************************************************\n");
+                txtcolor(12, 0);
+                printf("If you guess correctly within 5 times, get a 10 baht discount! \n");
+                resetc();
+                printf("*****************************************************************\n");
+
+                for (count = 1; count <= 5; count ++)
+                {
+                    printf("Guess [%d-%d] :  ",lo, up); 
+                    scanf("%d",&ans); 
+                    printf("%d",secret);
+                    if (ans == secret)
+                    {
+                        printf("<<< Correct >>>\n");
+                        reward++;
+                        break;
+                    }
+                    else if (ans<lo || ans>up)
+                    {
+                        printf("No! Please choose a number in [%d-%d] \n",lo,up);
+                    }   
+                    else if (ans > secret)
+                    {
+                        printf("---Less than %d---\n",ans);
+                        up = ans-1;
+                    }
+                    else if (ans < secret)
+                    {
+                        printf("---More than %d---\n",ans);
+                        lo = ans+1;
+                    }
+                } 
+                printf("The answer is %d !!! \n\n",secret);
+                printf("please press Enter button for go back \n"); 
+                getchar();
+                 
+
+                if (reward >=1)
+                {
+                    printf("------------------------------------\n");
+                    printf("you get reward !! \n");
+                    printf("You get 10 baht discount!!! \n");
+                    printf("------------------------------------\n");
+                    printf("please press Enter to goback menu \n"); getchar();
+                    discount = 10;
+                    laps = 1;
+                }
+                system("cls");
             }break;
             default:
             {
