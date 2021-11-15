@@ -1,4 +1,4 @@
-int check, checkgod, checkkill, toshop; //check = ดูว่ากดbackไหม checkgod = ดูว่านับถือพระเจ้าไหม checkkill = ดูว่าฆ่าคนไหม toshop = ดูว่ากดไปที่shopไหม
+int check, checkgod, checkkill, checkrg, toshop; // check = ดูว่ากดbackไหม checkgod = ดูว่านับถือพระเจ้าไหม checkkill = ดูว่าฆ่าคนไหม checkrg = ดูว่ากดbackตอนสำนึกผิดไหม toshop = ดูว่ากดไปที่shopไหม
 
 int heresy()
 {
@@ -54,7 +54,7 @@ int steal(void) //การขโมย
     printf("   [4] Less than 100000 baht\n");
     printf("   [5] More than or equal 100000 baht\n");
     txtcolor(12, 0);
-    printf("   [0] Back\n\n");
+    printf("   [0] Back to High-Low Heresy \n\n");
     resetc();
     return input5();
 }
@@ -71,7 +71,7 @@ int killanimal(void) //การฆ่าสัตว์
     printf("   [4] Less than 25\n");
     printf("   [5] More than or equal to 25\n");
     txtcolor(12, 0);
-    printf("   [0] Back\n\n");
+    printf("   [0] Back to High-Low Heresy\n\n");
     resetc();
     return input5();
 }
@@ -88,7 +88,7 @@ int lied(void) //การโกหก
     printf("   [4] Often\n");
     printf("   [5] Regularly\n");
     txtcolor(12, 0);
-    printf("   [0] Back\n\n");
+    printf("   [0] Back to High-Low Heresy\n\n");
     resetc();
     return input5();
 }
@@ -102,7 +102,7 @@ int adultery(void) //การผิดประเวณี
     printf("   [1] Never\n");
     printf("   [2] Ever\n");
     txtcolor(12, 0);
-    printf("   [0] Back\n\n");
+    printf("   [0] Back to High-Low Heresy\n\n");
     resetc();
     return input2();
 }
@@ -116,7 +116,7 @@ int kill(void) //การฆ่าคน
     printf("   [1] Never\n");
     printf("   [2] Ever\n");
     txtcolor(12, 0);
-    printf("   [0] Back\n\n");
+    printf("   [0] Back to High-Low Heresy\n\n");
     resetc();
     int heresy = input2() * 3;
     if (heresy > 0)
@@ -130,7 +130,7 @@ int kill(void) //การฆ่าคน
 
 void god(void) //การเชื่อในพระเจ้า
 {
-    int order, i = 0;
+    int order;
     printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
     txtcolor(4, 0);
     printf("   - Do you believe in GOD?");
@@ -139,9 +139,9 @@ void god(void) //การเชื่อในพระเจ้า
     printf("   [1] No                            ( (Y)  )  DOG?\n");
     printf("   [2] Yes                            /    \\ \n");
     txtcolor(12, 0);
-    printf("   [0] Back");
+    printf("   [0] Back to High-Low Heresy");
     resetc();
-    printf("                          (      )/)\n\n");
+    printf("       (      )/)\n\n");
     do
     {
         printf("\nSelect your order : ");
@@ -171,31 +171,59 @@ void god(void) //การเชื่อในพระเจ้า
 int sum(void) //รวมบาปทั้งหมด
 {
     int sum = 0;
-    sum = steal();
+    do
+    {
+        checkrg = 0;
+        sum = steal();
+    } while (checkrg == 1);
     if (check != 1)
     {
         sum = 0;
     }
     else
-        sum = sum + killanimal();
+    {
+        do
+        {
+            checkrg = 0;
+            sum = sum + killanimal();
+        } while (checkrg == 1);
+    }
     if (check != 1)
     {
         sum = 0;
     }
     else
-        sum = sum + lied();
+    {
+        do
+        {
+            checkrg = 0;
+            sum = sum + lied();
+        } while (checkrg == 1);
+    }
     if (check != 1)
     {
         sum = 0;
     }
     else
-        sum = sum + adultery();
+    {
+        do
+        {
+            checkrg = 0;
+            sum = sum + adultery();
+        } while (checkrg == 1);
+    }
     if (check != 1)
     {
         sum = 0;
     }
     else
-        sum = sum + kill();
+    {
+        do
+        {
+            checkrg = 0;
+            sum = sum + kill();
+        } while (checkrg == 1);
+    }
     if (check != 1)
     {
         sum = 0;
@@ -220,7 +248,7 @@ int regret(int heresy) //ถามความสำนึกผิด
     printf("   [1] Yes\n");
     printf("   [2] No\n");
     txtcolor(12, 0);
-    printf("   [0] Back\n\n");
+    printf("   [0] Back \n\n");
     resetc();
 
     do
@@ -238,13 +266,16 @@ int regret(int heresy) //ถามความสำนึกผิด
     switch (order)
     {
     case 0:
-        newheresy = 99999999;
+        newheresy = 0;
+        checkrg = 1;
         break;
     case 1:
         newheresy = heresy / 2;
+        checkrg = 0;
         break; //ถ้าสำนึกผิด บาปลดลงครึ่งหนึ่ง
     case 2:
         newheresy = heresy;
+        checkrg = 0;
         break;
     }
     return newheresy;
