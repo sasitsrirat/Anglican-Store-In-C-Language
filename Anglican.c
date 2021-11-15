@@ -255,6 +255,7 @@ void main()
                         break;
                     }
                 }while(1);
+                system("cls");
             }break;
 
             case 3: //Church Delivery
@@ -414,6 +415,10 @@ void main()
                         printf("\n----------------------------------------------");
                         resetc();
                         printf("\n\nSent payment slip to our E-mail or Line application\nAfter you sent Payment slip please wait for checking accuracy! \n");
+                        printf("--------------------------------------------------------\n");
+                        printf("(Email : EGCO111@hi5.com & LINE ID : @ProtectorOrz )\n");
+                        printf("--------------------------------------------------------\n");
+                        printf("\nEnter for back to menu ..\n");
                         getch();
 
                         if (check == 0)
@@ -503,8 +508,9 @@ void main()
                     printf("You can't play 2 laps/login \n");
                     printf("please try it again another time :D \n");
                     printf("------------------------------------\n");
-                    printf("please press Enter button for go back \n"); 
-                    getchar();
+                    printf("please press Enter button for go back to menu\n"); 
+                    getch();
+                    system("cls");
                     break;
                 }
                 
@@ -524,7 +530,7 @@ void main()
                     printf("%d",secret);
                     if (ans == secret)
                     {
-                        printf("<<< Correct >>>\n");
+                        printf("\n<<< Correct >>>\n");
                         reward++;
                         break;
                     }
@@ -544,20 +550,18 @@ void main()
                     }
                 } 
                 printf("The answer is %d !!! \n\n",secret);
-                printf("please press Enter button for go back \n"); 
-                getchar();
-                 
-
+                lo = 0;up = 99;
                 if (reward >=1)
                 {
                     printf("------------------------------------\n");
                     printf("you get reward !! \n");
                     printf("You get 10 baht discount!!! \n");
                     printf("------------------------------------\n");
-                    printf("please press Enter to goback menu \n"); getchar();
                     discount = 10;
                     laps = 1;
                 }
+                printf("please press Enter button for go back to menu \n"); 
+                getch();
                 system("cls");
             }break;
             default:
