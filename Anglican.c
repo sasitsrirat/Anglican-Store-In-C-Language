@@ -254,7 +254,7 @@ void main()
                         system("cls");
                         printf("corpse position : %s \n", data.pos);
                         printf("deceased name   : %s\n", data.name);
-                        printf("deceasd data    : %s\n\n", data.htr);
+                        printf("deceased data    : %s\n\n", data.htr);
                         printf("Do you want to change your details \nYes press [1]  No press [0]\n:");
                         fflush(stdin);
                         scanf("%d", &switch1);
@@ -347,12 +347,12 @@ void main()
                     txtcolor(12, 0);
                     printf("You can't pay for two programs at the same time. \n");
                     printf("please goback to clear all order at any program \n");
-                    printf("%d %d \n",p3,p1);
+                    //printf("%d %d \n",p3,p1);
                     printf("please press Enter button to continuous \n");
                     resetc();
                     printf("-------------------------------------------------\n");
                     getch();
-                    //break;
+                    break;
                 }
                 else
                     system("cls");
