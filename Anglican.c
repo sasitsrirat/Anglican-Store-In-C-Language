@@ -27,7 +27,7 @@ typedef struct
 void main()
 {
     char username[50];
-    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0; //กำหนดให้ทุกอย่างเป็นค่าเริ่มต้น
+    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0,p1=0; //กำหนดให้ทุกอย่างเป็นค่าเริ่มต้น
     int debit1, debit2, debit3, debit4;
     int d1,d2,d3,d4;
     char clear;
@@ -49,7 +49,7 @@ void main()
     }
 
     FILE *pt;
-    pt = fopen("data.txt", "r+");
+    pt = fopen("data.txt", "a+");
 
     printf(" --> Enter Username : ");
     fflush(stdin);
@@ -198,18 +198,18 @@ void main()
                         case 3: sum += 80; break;
                         case 4: sum += 50; break;
                         case 5: sum += 600; break;
-                        case 6: mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; i--; break;
-                    } i++;
+                        case 6: mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; i--; p1--; break;
+                    } i++; p1 = 1;
                 } while (order != 0); 
                 system("cls");
             }break;
 
-            case 2: //Corpserve
+            case 2: // Corpserve
             {
                 do
                 {
                     system("cls");
-                    txtcolor(14,0);
+                    txtcolor(14, 0);
                     printf("============================\n");
                     printf("||                        ||\n");
                     printf("||  Welcome to corpserve  ||\n");
@@ -217,44 +217,61 @@ void main()
                     printf("============================\n");
                     resetc();
 
+                    printf("  Go back to main menu [0]\n");
+                    printf("               stay in [1]\n");
+                    printf("Input:");
+                    scanf("%d", &k);
 
-                    printf("\n");
-                    printf("Input Corpse position : ");
-                    fflush(stdin);
-                    gets(data.pos);
-                    printf("---------------------------\n");
-
-
-                    printf("Input the deceased name in English : ");
-                    fflush(stdin);
-                    gets(data.name);
-                    printf("---------------------------\n");
-
-                    printf("Input the deceased data : ");
-                    fflush(stdin);
-                    gets(data.htr);
-
-                    system("cls");
-                    printf("-----------------------------------------\n");
-                    printf("corpse position : %s \n",data.pos);
-                    printf("deceased name   : %s\n",data.name);
-                    printf("deceasd data    : %s\n\n",data.htr);
-                    printf("-----------------------------------------\n");
-                    printf("Do you want to change your details \nYes press [1]  No press [0] : ");
-                    fflush(stdin);
-                    scanf("%d",&switch1);
-                    if(switch1==0)
+                    switch (k)
                     {
-                        printf("---------------------------------\n");
-                        txtcolor(14,0);
-                        printf("we will pick up the corpse soon\n");
-                        resetc();
-                        printf("---------------------------------\n");
-                        printf("\npress Enter for back to menu .....\n");
-                        getch();
+                    case (0):
                         break;
+                    case (1):
+                        system("cls");
+                        txtcolor(14, 0);
+                        printf("============================\n");
+                        printf("||                        ||\n");
+                        printf("||  Welcome to corpserve  ||\n");
+                        printf("||                        ||\n");
+                        printf("============================\n");
+                        resetc();
+                        printf("\n");
+                        printf("Input Corpse position : ");
+                        fflush(stdin);
+                        gets(data.pos);
+                        printf("---------------------------\n");
+
+                        printf("Input the deceased name in English : ");
+                        fflush(stdin);
+                        gets(data.name);
+                        printf("---------------------------\n");
+
+                        printf("Input the deceased data : ");
+                        fflush(stdin);
+                        gets(data.htr);
+
+                        printf("---------------------------\n");
+                        system("cls");
+                        printf("corpse position : %s \n", data.pos);
+                        printf("deceased name   : %s\n", data.name);
+                        printf("deceasd data    : %s\n\n", data.htr);
+                        printf("Do you want to change your details \nYes press [1]  No press [0]\n:");
+                        fflush(stdin);
+                        scanf("%d", &switch1);
+                        if (switch1 == 0)
+                        {
+                            printf("---------------------------------\n");
+                            txtcolor(14, 0);
+                            printf("we will pick up the corpse soon\n");
+                            resetc();
+                            printf("---------------------------------\n");
+                            printf("\npress Enter for back to menu .....\n");
+                            getch();
+                            break;
+                        }
                     }
-                }while(1);
+                    break;
+                } while (1);
                 system("cls");
             }break;
 
@@ -307,8 +324,8 @@ void main()
                         case 3: sum += 2500; break;
                         case 4: sum += 2500; break;
                         case 5: sum += 2500; break;
-                        case 6: mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; i--; break;
-                    } i++; p3 = 1; 
+                        case 6: mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; i--; p1--; break;
+                    } i++; p3 = 1; // ถ้าเลือกใช้โปรแกรมนี้ p3 = 1
 
                 } while (order != 0);
                 system("cls");
@@ -324,17 +341,18 @@ void main()
 
             case 5 : //payment
             {
-                if (p3 == 1 && sum > 0)
+                if ((p3 == 1) && (p1 == 1))
                 {   
                     printf("-------------------------------------------------\n");
                     txtcolor(12, 0);
                     printf("You can't pay for two programs at the same time. \n");
                     printf("please goback to clear all order at any program \n");
+                    printf("%d %d \n",p3,p1);
                     printf("please press Enter button to continuous \n");
                     resetc();
                     printf("-------------------------------------------------\n");
                     getch();
-                    break;
+                    //break;
                 }
                 else
                     system("cls");
@@ -480,7 +498,7 @@ void main()
                     printf("We will sent goods at Your address : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;
                 }
                 if (mem2 == 1)
                 {
@@ -492,7 +510,7 @@ void main()
                     printf("We will go to your location @ : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button for continuous"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;
                 }
                 else
                     fclose(pt);
@@ -527,7 +545,7 @@ void main()
                 {
                     printf("Guess [%d-%d] :  ",lo, up); 
                     scanf("%d",&ans); 
-                    printf("%d",secret);
+                    //printf("%d",secret);
                     if (ans == secret)
                     {
                         printf("\n<<< Correct >>>\n");
