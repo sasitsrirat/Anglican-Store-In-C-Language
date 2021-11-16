@@ -27,9 +27,10 @@ typedef struct
 void main()
 {
     char username[50];
-    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0,p1=0; //กำหนดให้ทุกอย่างเป็นค่าเริ่มต้น
+    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0,p1=0,countp2; //กำหนดให้ทุกอย่างเป็นค่าเริ่มต้น
     int debit1, debit2, debit3, debit4;
     int d1,d2,d3,d4;
+    int cocount = 0;
     char clear;
     char address[100];
 
@@ -37,7 +38,7 @@ void main()
     int ans, secret, count,reward=0,discount = 0,laps = 0;
     int lo = 0,up = 99;
 
-    information data;
+    information data[10];
     int numcount,j,k=0,switch1;
 
 
@@ -114,19 +115,20 @@ void main()
         printf("|| Username : %10s             ||\n",username);
         printf("|| Your order : %5d Orders         ||\n",i);
         printf("|| Cost       : %5d THB            ||\n",sum);
+        printf("|| Discount   : %5d Coupon         ||\n",reward);
         resetc();
         printf("=======================================\n");
         //showontop
         printf("---------------------------------------\n");
         printf("         Name of programs         \n");
         printf("---------------------------------------\n");
-        printf("\n||   Anglican Shop         [1]  ||\n"); // ร้านขายของของ
-        printf("||   Corpserve             [2]  ||\n");   // รับศพไร้ญาติ
-        printf("||   Church Delivery       [3]  ||\n");   // บริการจองรถขนศพ
-        printf("||   High-Low Heresy       [4]  ||\n");   //คำนวนบุญบาป
-        printf("||   Payment Method        [5]  ||\n");   //จ่าบเงินและส่งของ
-        printf("||   Play For Discount     [6]  ||\n");
-        printf("||   Exit program          [7]  ||\n");
+        printf("\n||   Anglican Shop              [1]  ||\n"); // ร้านขายของของ
+        printf("||   Corpserve                  [2]  ||\n");   // รับศพไร้ญาติ
+        printf("||   Church Delivery            [3]  ||\n");   // บริการจองรถขนศพ
+        printf("||   High-Low Heresy            [4]  ||\n");   //คำนวนบุญบาป
+        printf("||   Payment Method             [5]  ||\n");   //จ่าบเงินและส่งของ
+        printf("||   Play For Discount          [6]  ||\n");
+        printf("||   Exit program               [7]  ||\n");
 
         do
         {
@@ -210,25 +212,8 @@ void main()
             {
                 do
                 {
-                    system("cls");
-                    txtcolor(14, 0);
-                    printf("============================\n");
-                    printf("||                        ||\n");
-                    printf("||  Welcome to corpserve  ||\n");
-                    printf("||                        ||\n");
-                    printf("============================\n");
-                    resetc();
-
-                    printf("  Go back to main menu [0]\n");
-                    printf("               stay in [1]\n");
-                    printf("Input:");
-                    intergerexception(&k);
-
-                    switch (k)
+                    do
                     {
-                    case (0):
-                        break;
-                    case (1):
                         system("cls");
                         txtcolor(14, 0);
                         printf("============================\n");
@@ -237,44 +222,110 @@ void main()
                         printf("||                        ||\n");
                         printf("============================\n");
                         resetc();
-                        printf("\n");
-                        printf("Input Corpse position : ");
-                        fflush(stdin);
-                        gets(data.pos);
-                        printf("---------------------------\n");
-
-                        printf("Input the deceased name in English : ");
-                        fflush(stdin);
-                        gets(data.name);
-                        printf("---------------------------\n");
-
-                        printf("Input the deceased data : ");
-                        fflush(stdin);
-                        gets(data.htr);
-
-                        printf("---------------------------\n");
-                        system("cls");
-                        printf("corpse position : %s \n", data.pos);
-                        printf("deceased name   : %s\n", data.name);
-                        printf("deceased data    : %s\n\n", data.htr);
-                        printf("---------------------------\n");
-                        printf("Do you want to change your details \nYes press [1]  No press [0]\n:");
-                        fflush(stdin);
-                        intergerexception(&switch1);
-                        
-                        if (switch1 == 0)
+                        printf("-----------------------------\n");
+                        printf("||  Input data        [1] ||\n");
+                        printf("||  Check corpserve   [2] ||\n");
+                        printf("||  Back to main menu [0] ||\n");
+                        printf("-----------------------------\n");
+                        printf("Input : ");
+                        scanf("%d", &k);
+                        if (k != 1 && k != 0 && k != 2)
                         {
-                            printf("---------------------------------\n");
-                            txtcolor(14, 0);
-                            printf("we will pick up the corpse soon\n");
-                            resetc();
-                            printf("---------------------------------\n");
-                            printf("\npress Enter for back to menu .....\n");
-                            getch();
+                            printf("Error please try again");
+                        }
+                    } while (k != 1 && k != 0 && k != 2);
+
+                    switch (k)
+                    {
+                        case (0):
+                        {
                             break;
                         }
+                        case (1):
+                        {
+                            system("cls");
+                            txtcolor(14, 0);
+                            printf("============================\n");
+                            printf("||                        ||\n");
+                            printf("||  Welcome to corpserve  ||\n");
+                            printf("||                        ||\n");
+                            printf("============================\n");
+                            resetc();
+                            printf("\n");
+                            printf("Input Corpse position : ");
+                            fflush(stdin);
+                            gets(data[cocount].pos);
+                            printf("---------------------------\n");
+
+                            printf("Input the deceased name in English : ");
+                            fflush(stdin);
+                            gets(data[cocount].name);
+                            printf("---------------------------\n");
+
+                            printf("Input the deceased data : ");
+                            fflush(stdin);
+                            gets(data[cocount].htr);
+
+                            printf("---------------------------------\n");
+                            system("cls");
+                            printf("corpse position : %s \n", data[cocount].pos);
+                            printf("deceased name   : %s\n", data[cocount].name);
+                            printf("deceasd data    : %s\n", data[cocount].htr);
+                            printf("---------------------------------\n");
+                            printf("Do you want to change your details ??? \nYes press [1]  No press [0]\n");
+                            printf("Input : ");
+                            fflush(stdin);
+                            intergerexception(&switch1);
+                            if (switch1 == 0)
+                            {
+                                cocount += 1;
+                                k = 0;
+                                printf("---------------------------------\n");
+                                txtcolor(14, 0);
+                                printf("we will pick up the corpse soon\n");
+                                resetc();
+                                printf("---------------------------------\n");
+                                printf("\npress Enter for back to menu .....\n");
+                                getch();
+                                break;
+                            }
+                            else
+                                break;
+                        }break;
+                        case (2):
+                        {
+                            if (cocount > 0)
+                            {
+                                for (countp2 = 0; countp2 < cocount; countp2++)
+                                {
+                                    printf("---------------------------------\n");
+                                    printf("%d. corpse position : %s\n", countp2 + 1, data[cocount - 1].name);
+                                    printf("    deceased name : %s\n", data[cocount - 1].pos);
+                                    printf("    deceasd data  : %s\n\n", data[cocount - 1].htr);
+                                    printf("---------------------------------\n");
+                                }
+                            }
+                            else
+                            {
+                                printf("You haven't input the data yet\n");
+                            }
+                            printf("---------------------------------\n");
+                            printf("goback to menu      [0]\n");
+                            printf("go to input data    [1]\n");
+                            printf("reset data          [2]\n");
+                            printf("---------------------------------\n");
+                            printf("Input : ");
+                            intergerexception(&k);
+                        }break;
                     }
-                    break;
+                    if (k == 0)
+                    {
+                        break;
+                    }
+                    if (k == 2)
+                    {
+                        cocount = 0;
+                    }
                 } while (1);
                 system("cls");
             }break;
@@ -506,7 +557,7 @@ void main()
                     printf("We will sent goods at Your address : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0,reward = 0;
                 }
                 if (mem2 == 1)
                 {
@@ -518,7 +569,7 @@ void main()
                     printf("We will go to your location @ : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button for continuous"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;reward = 0;
                 }
                 else
                     fclose(pt);
@@ -553,7 +604,7 @@ void main()
                 {
                     printf("Guess [%d-%d] :  ",lo, up); //scanf("%d",&ans); 
                     intergerexception(&ans);
-                    //printf("%d",secret);
+                    printf("%d",secret);
                     if (ans == secret)
                     {
                         printf("\n<<< Correct >>>\n");
@@ -579,10 +630,12 @@ void main()
                 lo = 0;up = 99;
                 if (reward >=1)
                 {
-                    printf("------------------------------------\n");
-                    printf("you get reward !! \n");
+                    printf("------------------------------------------------\n");
+                    printf("You get reward !! \n");
                     printf("You get 10 baht discount!!! \n");
-                    printf("------------------------------------\n");
+                    printf("Let's use it before exit program\n");
+                    printf("otherwise it will be considered a waiver.\n");
+                    printf("------------------------------------------------\n");
                     discount = 10;
                     laps = 1;
                 }
