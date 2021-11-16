@@ -134,7 +134,8 @@ void main()
             
             if (scanf("%d", &program) != 1)
             {
-                printf("error\n");
+                printf("Error please input only interger \n");
+                return 0;
             }
             if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 5 && program != 6 && program != 7)
             {
@@ -166,7 +167,7 @@ void main()
                     printf("\n---------------------------------------\n");
                     printf("   -- List of item   \n");
                     printf("   [1] Holy water             150THB\n");
-                    printf("   [2] Gun of heaven          990THB\n");
+                    printf("   [2] Gun of god             990THB\n");
                     printf("   [3] Crucifix Mhor-Praa     80THB\n");
                     printf("   [4] Bible Book             50THB\n");
                     printf("   [5] Necklace of God        600THB\n");
@@ -179,7 +180,8 @@ void main()
                     do
                     {
                         printf("\nSelect your order : ");
-                        scanf("%d", &order);
+                        intergerexception(&order);
+                        //printf("order = %d",order); checkinput
                         if ((order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6))
                         {
                             printf("---------------------------------------\n");
@@ -193,13 +195,13 @@ void main()
                     switch (order)
                     {
                         case 0: i--; break;
-                        case 1: sum += 150; break;
-                        case 2: sum += 990; break;
-                        case 3: sum += 80; break;
-                        case 4: sum += 50; break;
-                        case 5: sum += 600; break;
+                        case 1: sum += 150;p1 = 1; break;
+                        case 2: sum += 990;p1 = 1; break;
+                        case 3: sum += 80;p1 = 1; break;
+                        case 4: sum += 50;p1 = 1; break;
+                        case 5: sum += 600;p1 = 1; break;
                         case 6: mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; i--; p1--; break;
-                    } i++; p1 = 1;
+                    } i++;
                 } while (order != 0); 
                 system("cls");
             }break;
@@ -220,7 +222,7 @@ void main()
                     printf("  Go back to main menu [0]\n");
                     printf("               stay in [1]\n");
                     printf("Input:");
-                    scanf("%d", &k);
+                    intergerexception(&k);
 
                     switch (k)
                     {
@@ -255,9 +257,11 @@ void main()
                         printf("corpse position : %s \n", data.pos);
                         printf("deceased name   : %s\n", data.name);
                         printf("deceased data    : %s\n\n", data.htr);
+                        printf("---------------------------\n");
                         printf("Do you want to change your details \nYes press [1]  No press [0]\n:");
                         fflush(stdin);
-                        scanf("%d", &switch1);
+                        intergerexception(&switch1);
+                        
                         if (switch1 == 0)
                         {
                             printf("---------------------------------\n");
@@ -305,7 +309,8 @@ void main()
 
                     do
                     {
-                        printf("\nWhere do you want our service : "); scanf("%d", &order);
+                        printf("\nWhere do you want our service : "); //scanf("%d", &order);
+                        intergerexception(&order);
                         if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
                         {
                             printf("---------------------------------------\n");
@@ -319,13 +324,13 @@ void main()
                     switch (order)
                     {
                         case 0: i--; break;
-                        case 1: sum += 1000; break;
-                        case 2: sum += 1500; break;
-                        case 3: sum += 2500; break;
-                        case 4: sum += 2500; break;
-                        case 5: sum += 2500; break;
+                        case 1: sum += 1000;p3 = 1; break;
+                        case 2: sum += 1500;p3 = 1; break;
+                        case 3: sum += 2500;p3 = 1; break;
+                        case 4: sum += 2500;p3 = 1; break;
+                        case 5: sum += 2500;p3 = 1; break;
                         case 6: mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0; i--; p1--; break;
-                    } i++; p3 = 1; // ถ้าเลือกใช้โปรแกรมนี้ p3 = 1
+                    } i++; //ถ้าเลือกใช้โปรแกรมนี้ p3 = 1
 
                 } while (order != 0);
                 system("cls");
@@ -352,6 +357,7 @@ void main()
                     resetc();
                     printf("-------------------------------------------------\n");
                     getch();
+                    system("cls");
                     break;
                 }
                 else
@@ -369,7 +375,8 @@ void main()
                     do //check method input
                     {
                         printf("Select number : "); 
-                        scanf("%d",&method); // method = getche(); //getch not show but getche will show
+                        //scanf("%d",&method); // method = getche(); //getch not show but getche will show
+                        intergerexception(&method);
 
                         if ((method != 1) && (method != 2) && (method != 3) && (method != 4))
                         {
@@ -397,9 +404,9 @@ void main()
                             {
                                 printf("Enter card number (0000 0000 0000 0000) : ");
                                 scanf("%d %d %d %d",&debit1, &debit2, &debit3, &debit4);
-                                if(debit1>=9999 || debit2>= 9999 || debit3>= 9999 || debit4>= 9999)
+                                if(debit1 >= 9999 || debit2 >= 9999 || debit3 >= 9999 || debit4 >= 9999)
                                 {
-                                    printf("\nError please check again !");
+                                    printf("\nError please check again ! \n");
                                 }
                             } while (debit1>=9999 || debit2>=9999 || debit3>=9999 || debit4>=9999);
                             fprintf(pt,"\n%s %d %d %d %d %d", username, checkpassword, debit1, debit2, debit3, debit4); //ถ้าลูกค้าใหม่ซื้อของจะบันทึกข้อมูลทุกอย่างให้ รวมทั้งบัตร
@@ -463,7 +470,8 @@ void main()
                             printf("2 Thailand post     ( +10 THB 3-4 day all Thailand )   -->[2]\n");
                             printf("3 Anglican parcel   ( +5 THB 5-7 days all Thailand )   -->[3]\n");
                             do{
-                                printf("Select your shipping company : "); scanf("%d",&transport);
+                                printf("Select your shipping company : "); //scanf("%d",&transport);
+                                intergerexception(&transport);
                                 if (transport != 1 && transport != 2 && transport != 3)
                                     {
                                         printf("------------------------------------------------------------------------\n");
@@ -543,8 +551,8 @@ void main()
 
                 for (count = 1; count <= 5; count ++)
                 {
-                    printf("Guess [%d-%d] :  ",lo, up); 
-                    scanf("%d",&ans); 
+                    printf("Guess [%d-%d] :  ",lo, up); //scanf("%d",&ans); 
+                    intergerexception(&ans);
                     //printf("%d",secret);
                     if (ans == secret)
                     {
