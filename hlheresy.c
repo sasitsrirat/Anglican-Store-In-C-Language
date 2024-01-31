@@ -44,7 +44,7 @@ int heresy()
 
 int steal(void) //การขโมย
 {
-    printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
+    printf("\nHigh-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
     txtcolor(4, 0);
     printf("   - Have you ever stolen from others?\n");
     resetc();
@@ -61,7 +61,7 @@ int steal(void) //การขโมย
 
 int killanimal(void) //การฆ่าสัตว์
 {
-    printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
+    printf("\nHigh-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
     txtcolor(4, 0);
     printf("   - Have you ever killed a medium to large animal? \n     (larger than or equal to a bird or rat)\n");
     resetc();
@@ -95,7 +95,7 @@ int lied(void) //การโกหก
 
 int adultery(void) //การผิดประเวณี
 {
-    printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
+    printf("\nHigh-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
     txtcolor(4, 0);
     printf("   - Have you ever committed adultery? \n");
     resetc();
@@ -109,7 +109,7 @@ int adultery(void) //การผิดประเวณี
 
 int kill(void) //การฆ่าคน
 {
-    printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
+    printf("\nHigh-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
     txtcolor(4, 0);
     printf("   - Have you ever killed a human? \n");
     resetc();
@@ -131,7 +131,7 @@ int kill(void) //การฆ่าคน
 void god(void) //การเชื่อในพระเจ้า
 {
     int order;
-    printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
+    printf("\nHigh-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
     txtcolor(4, 0);
     printf("   - Do you believe in GOD?");
     resetc();
@@ -292,7 +292,7 @@ int recommend(void) //คำแนะนำ
     }
     else
     {
-        printf("\n++++++++++++++++++++++++++++++++++ High-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
+        printf("\nHigh-Low Heresy ++++++++++++++++++++++++++++++++++\n\n");
         if (Sum <= 30 && checkkill == 0)
         {
             printf("   You are a very good person.                                                     /\\_/\\\n");

@@ -38,3 +38,14 @@ int random_between(int min, int max)
     int r = (rand() / (float) RAND_MAX) * (max + 1) + min;
     return r > max ? max: r;
 }
+
+int intergerexception(int *value)
+{
+    if (scanf("%d", value) != 1)
+    {
+        printf("Error please input only interger \n");
+        exit(0);
+    }
+    else
+        return *value;
+}
