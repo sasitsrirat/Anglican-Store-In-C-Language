@@ -13,6 +13,7 @@ struct customer
     char name[50];
     int password;
     int db1,db2,db3,db4;
+    int rw;
 }ct;
 
 typedef struct
@@ -27,18 +28,17 @@ typedef struct
 void main()
 {
     char username[50];
-    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0,p1=0,countp2; //กำหนดให้ทุกอย่างเป็นค่าเริ่มต้น
+    int program, order, sum = 0, i = 0,checkpassword,check=0,method,transport=0,mem=0,mem2=0,p3=0,p1=0,game; //กำหนดให้ทุกอย่างเป็นค่าเริ่มต้น
     int debit1, debit2, debit3, debit4;
     int d1,d2,d3,d4;
-    int cocount = 0;
     char clear;
     char address[100];
 
     //play for discount 
-    int ans, secret, count,reward=0,discount = 0,laps = 0;
+    int ans, secret, count,reward,discount = 10,laps = 0;
     int lo = 0,up = 99;
 
-    information data[10];
+    information data;
     int numcount,j,k=0,switch1;
 
 
@@ -50,7 +50,7 @@ void main()
     }
 
     FILE *pt;
-    pt = fopen("data.txt", "a+");
+    pt = fopen("user.txt", "r+");
 
     printf(" --> Enter Username : ");
     fflush(stdin);
@@ -58,7 +58,7 @@ void main()
 
     while(!feof(pt)) //check user.txt
     {
-        fscanf(pt,"%s%d%d%d%d%d",ct.name,&ct.password,&ct.db1,&ct.db2,&ct.db3,&ct.db4);
+        fscanf(pt,"%s%d%d%d%d%d%d",ct.name,&ct.password,&ct.db1,&ct.db2,&ct.db3,&ct.db4,&ct.rw);
         if (strcmp(ct.name,username)==0 && check !=1) //ตรวจว่า username ที่กรอกมากับ ct.name ที่อยู่ในไฟล์ตรงกันไหม ถ้าตรงคือลูกค้าเก่า
         {
             printf("----------------------------------------\n");
@@ -69,6 +69,7 @@ void main()
             d2 = ct.db2 ;
             d3 = ct.db3 ;
             d4 = ct.db4 ;
+            reward = ct.rw;
             resetc();
             printf("----------------------------------------\n");
             check = 1; //กำหนดให้ check = 1 คือลูกค้าเก่า
@@ -127,18 +128,14 @@ void main()
         printf("||   Church Delivery            [3]  ||\n");   // บริการจองรถขนศพ
         printf("||   High-Low Heresy            [4]  ||\n");   //คำนวนบุญบาป
         printf("||   Payment Method             [5]  ||\n");   //จ่าบเงินและส่งของ
-        printf("||   Play For Discount          [6]  ||\n");
+        printf("||   Play For Discount          [6]  ||\n");   //ระบบคูปอง
         printf("||   Exit program               [7]  ||\n");
 
         do
         {
             printf("\nSelect programs by press number : "); 
-            
-            if (scanf("%d", &program) != 1)
-            {
-                printf("Error please input only interger \n");
-                return 0;
-            }
+            scanf("%d", &program);
+        
             if (program != 1 && program != 2 && program != 3 && program != 4 && program != 5 && program != 5 && program != 6 && program != 7)
             {
                 printf("---------------------------------------\n");
@@ -181,9 +178,7 @@ void main()
 
                     do
                     {
-                        printf("\nSelect your order : ");
-                        intergerexception(&order);
-                        //printf("order = %d",order); checkinput
+                        printf("\nSelect your order : "); scanf("%d", &order);
                         if ((order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6))
                         {
                             printf("---------------------------------------\n");
@@ -212,8 +207,25 @@ void main()
             {
                 do
                 {
-                    do
+                    system("cls");
+                    txtcolor(14, 0);
+                    printf("============================\n");
+                    printf("||                        ||\n");
+                    printf("||  Welcome to corpserve  ||\n");
+                    printf("||                        ||\n");
+                    printf("============================\n");
+                    resetc();
+
+                    printf("  Go back to main menu [0]\n");
+                    printf("               stay in [1]\n");
+                    printf("Input:");
+                    scanf("%d", &k);
+
+                    switch (k)
                     {
+                    case (0):
+                        break;
+                    case (1):
                         system("cls");
                         txtcolor(14, 0);
                         printf("============================\n");
@@ -222,110 +234,44 @@ void main()
                         printf("||                        ||\n");
                         printf("============================\n");
                         resetc();
-                        printf("-----------------------------\n");
-                        printf("||  Input data        [1] ||\n");
-                        printf("||  Check corpserve   [2] ||\n");
-                        printf("||  Back to main menu [0] ||\n");
-                        printf("-----------------------------\n");
-                        printf("Input : ");
-                        scanf("%d", &k);
-                        if (k != 1 && k != 0 && k != 2)
-                        {
-                            printf("Error please try again");
-                        }
-                    } while (k != 1 && k != 0 && k != 2);
+                        printf("\n");
+                        printf("Input Corpse position : ");
+                        fflush(stdin);
+                        gets(data.pos);
+                        printf("---------------------------\n");
 
-                    switch (k)
-                    {
-                        case (0):
+                        printf("Input the deceased name in English : ");
+                        fflush(stdin);
+                        gets(data.name);
+                        printf("---------------------------\n");
+
+                        printf("Input the deceased data : ");
+                        fflush(stdin);
+                        gets(data.htr);
+
+                        printf("---------------------------\n");
+                        system("cls");
+                        printf("corpse position : %s \n", data.pos);
+                        printf("deceased name   : %s\n", data.name);
+                        printf("deceased data    : %s\n\n", data.htr);
+                        printf("---------------------------\n");
+                        printf("Do you want to change your details \nYes press [1]  No press [0]\n:");
+                        fflush(stdin);
+                        scanf("%d", &switch1);
+                        
+                        if (switch1 == 0)
                         {
+                            printf("---------------------------------\n");
+                            txtcolor(14, 0);
+                            printf("we will pick up the corpse soon\n");
+                            resetc();
+                            printf("---------------------------------\n");
+                            printf("\npress Enter for back to menu .....\n");
+                            getch();
                             break;
                         }
-                        case (1):
-                        {
-                            system("cls");
-                            txtcolor(14, 0);
-                            printf("============================\n");
-                            printf("||                        ||\n");
-                            printf("||  Welcome to corpserve  ||\n");
-                            printf("||                        ||\n");
-                            printf("============================\n");
-                            resetc();
-                            printf("\n");
-                            printf("Input Corpse position : ");
-                            fflush(stdin);
-                            gets(data[cocount].pos);
-                            printf("---------------------------\n");
-
-                            printf("Input the deceased name in English : ");
-                            fflush(stdin);
-                            gets(data[cocount].name);
-                            printf("---------------------------\n");
-
-                            printf("Input the deceased data : ");
-                            fflush(stdin);
-                            gets(data[cocount].htr);
-
-                            printf("---------------------------------\n");
-                            system("cls");
-                            printf("corpse position : %s \n", data[cocount].pos);
-                            printf("deceased name   : %s\n", data[cocount].name);
-                            printf("deceasd data    : %s\n", data[cocount].htr);
-                            printf("---------------------------------\n");
-                            printf("Do you want to change your details ??? \nYes press [1]  No press [0]\n");
-                            printf("Input : ");
-                            fflush(stdin);
-                            intergerexception(&switch1);
-                            if (switch1 == 0)
-                            {
-                                cocount += 1;
-                                k = 0;
-                                printf("---------------------------------\n");
-                                txtcolor(14, 0);
-                                printf("we will pick up the corpse soon\n");
-                                resetc();
-                                printf("---------------------------------\n");
-                                printf("\npress Enter for back to menu .....\n");
-                                getch();
-                                break;
-                            }
-                            else
-                                break;
-                        }break;
-                        case (2):
-                        {
-                            if (cocount > 0)
-                            {
-                                for (countp2 = 0; countp2 < cocount; countp2++)
-                                {
-                                    printf("---------------------------------\n");
-                                    printf("%d. corpse position : %s\n", countp2 + 1, data[cocount - 1].name);
-                                    printf("    deceased name : %s\n", data[cocount - 1].pos);
-                                    printf("    deceasd data  : %s\n\n", data[cocount - 1].htr);
-                                    printf("---------------------------------\n");
-                                }
-                            }
-                            else
-                            {
-                                printf("You haven't input the data yet\n");
-                            }
-                            printf("---------------------------------\n");
-                            printf("goback to menu      [0]\n");
-                            printf("go to input data    [1]\n");
-                            printf("reset data          [2]\n");
-                            printf("---------------------------------\n");
-                            printf("Input : ");
-                            intergerexception(&k);
-                        }break;
                     }
-                    if (k == 0)
-                    {
-                        break;
-                    }
-                    if (k == 2)
-                    {
-                        cocount = 0;
-                    }
+                    break;
                 } while (1);
                 system("cls");
             }break;
@@ -360,8 +306,7 @@ void main()
 
                     do
                     {
-                        printf("\nWhere do you want our service : "); //scanf("%d", &order);
-                        intergerexception(&order);
+                        printf("\nWhere do you want our service : "); scanf("%d", &order);
                         if (order != 0 && order != 1 && order != 2 && order != 3 && order != 4 && order != 5 && order != 6)
                         {
                             printf("---------------------------------------\n");
@@ -426,8 +371,7 @@ void main()
                     do //check method input
                     {
                         printf("Select number : "); 
-                        //scanf("%d",&method); // method = getche(); //getch not show but getche will show
-                        intergerexception(&method);
+                        scanf("%d",&method); // method = getche(); //getch not show but getche will show
 
                         if ((method != 1) && (method != 2) && (method != 3) && (method != 4))
                         {
@@ -521,8 +465,7 @@ void main()
                             printf("2 Thailand post     ( +10 THB 3-4 day all Thailand )   -->[2]\n");
                             printf("3 Anglican parcel   ( +5 THB 5-7 days all Thailand )   -->[3]\n");
                             do{
-                                printf("Select your shipping company : "); //scanf("%d",&transport);
-                                intergerexception(&transport);
+                                printf("Select your shipping company : "); scanf("%d",&transport);
                                 if (transport != 1 && transport != 2 && transport != 3)
                                     {
                                         printf("------------------------------------------------------------------------\n");
@@ -553,11 +496,11 @@ void main()
                     txtcolor(9, 0);
                     printf("EA%d%d0TH \n",rand()% 99999,rand()% 99999);
                     resetc();
-                    printf("Total price is %d THB \n",sum-discount);
+                    printf("Total price is %d THB \n",sum-(discount*reward));
                     printf("We will sent goods at Your address : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0,reward = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;
                 }
                 if (mem2 == 1)
                 {
@@ -565,82 +508,112 @@ void main()
                     fflush(stdin);
                     gets(address);
                     printf("----------------------------------------------------------------------------\n");
-                    printf("Total price is %d THB \n",sum-discount);
+                    printf("Total price is %d THB \n",sum-(discount*reward));
                     printf("We will go to your location @ : %s\n",address);
                     printf("----------------------------------------------------------------------------\n");
                     printf("please press Enter button for continuous"); getchar();
-                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;reward = 0;
+                    mem2 = 0; p3 = 0; sum = 0; i = 0 , mem = 0, discount = 0,p1 = 0;
                 }
                 else
-                    fclose(pt);
+                    //fclose(pt);
                     system("cls");
             }break;
             
             case 6 :
             {
                 system("cls");
-                if (laps == 1)
-                {
-                    printf("------------------------------------\n");
-                    printf("You can't play 2 laps/login \n");
-                    printf("please try it again another time :D \n");
-                    printf("------------------------------------\n");
-                    printf("please press Enter button for go back to menu\n"); 
-                    getch();
-                    system("cls");
-                    break;
-                }
+                printf("------------------------------------\n");
+                printf("Show my discount coupon      [1] \n");
+                printf("Play game for get discount   [2] \n");
+                printf("Back to Menu                 [3] \n");
+                printf("------------------------------------\n");
                 
-                srand(time(NULL));
-                secret = rand()%100;
-
-                printf("*****************************************************************\n");
-                txtcolor(12, 0);
-                printf("If you guess correctly within 5 times, get a 10 baht discount! \n");
-                resetc();
-                printf("*****************************************************************\n");
-
-                for (count = 1; count <= 5; count ++)
+                do // check method input
                 {
-                    printf("Guess [%d-%d] :  ",lo, up); //scanf("%d",&ans); 
-                    intergerexception(&ans);
-                    printf("%d",secret);
-                    if (ans == secret)
+                    printf("Select number : ");
+                    intergerexception(&game); //scanf // method = getche(); //getch not show but getche will show
+
+                    if ((game != 1) && (game != 2) && (game != 3))
                     {
-                        printf("\n<<< Correct >>>\n");
-                        reward++;
-                        break;
+                        printf("---------------------------------------\n");
+                        txtcolor(12, 0);
+                        printf(" !!!Error!!! Please try again \n");
+                        resetc();
+                        printf("---------------------------------------\n");
                     }
-                    else if (ans<lo || ans>up)
-                    {
-                        printf("No! Please choose a number in [%d-%d] \n",lo,up);
-                    }   
-                    else if (ans > secret)
-                    {
-                        printf("---Less than %d---\n",ans);
-                        up = ans-1;
-                    }
-                    else if (ans < secret)
-                    {
-                        printf("---More than %d---\n",ans);
-                        lo = ans+1;
-                    }
-                } 
-                printf("The answer is %d !!! \n\n",secret);
-                lo = 0;up = 99;
-                if (reward >=1)
+                } while ((game != 1 && game != 2 && game != 3));
+
+                switch (game)
                 {
-                    printf("------------------------------------------------\n");
-                    printf("You get reward !! \n");
-                    printf("You get 10 baht discount!!! \n");
-                    printf("Let's use it before exit program\n");
-                    printf("otherwise it will be considered a waiver.\n");
-                    printf("------------------------------------------------\n");
-                    discount = 10;
-                    laps = 1;
+                    case 1 :
+                    {
+                        printf("My Reward : %d \n",reward);
+                    }break;
+                    case 2:
+                    {
+                        if (laps == 1 || reward > 3)
+                        {
+                            printf("------------------------------------\n");
+                            printf("You can't play 2 laps/login \n");
+                            printf("please try it again another time :D \n");
+                            printf("------------------------------------\n");
+                            printf("please press Enter button for go back to menu\n");
+                            getch();
+                            system("cls");
+                            break;
+                        }
+                        else if (laps == 0 && reward < 3)
+                        {
+                            srand(time(NULL));
+                            secret = rand() % 100;
+
+                            printf("*****************************************************************\n");
+                            txtcolor(12, 0);
+                            printf("If you guess correctly within 5 times, get a 10 baht discount! \n");
+                            resetc();
+                            printf("*****************************************************************\n");
+
+                            for (count = 1; count <= 5; count++)
+                            {
+                                printf("Guess [%d-%d] :  ", lo, up);
+                                scanf("%d", &ans);
+                                printf("%d",secret);
+                                if (ans == secret)
+                                {
+                                    printf("\n--------<<< Correct >>>-----------\n");
+                                    printf("------------------------------------\n");
+                                    printf("you get reward !! \n");
+                                    printf("You get 10 baht discount!!! \n");
+                                    printf("------------------------------------\n");
+                                    laps = 1;
+                                    reward++;
+                                    fprintf(pt,"\n%s %d 0 0 0 0 %d", username, checkpassword, debit1, debit2, debit3, debit4, reward); //ถ้าลูกค้าใหม่ซื้อของจะบันทึกข้อมูลทุกอย่างให้ รวมทั้งบัตร
+                                    break;
+                                   
+                                }
+                                else if (ans < lo || ans > up)
+                                {
+                                    printf("No! Please choose a number in [%d-%d] \n", lo, up); 
+                                }
+                                else if (ans > secret)
+                                {
+                                    printf("---Less than %d---\n", ans);
+                                    up = ans - 1;
+                                }
+                                else if (ans < secret)
+                                {
+                                    printf("---More than %d---\n", ans);
+                                    lo = ans + 1;
+                                }
+                            }
+                            printf("The answer is %d !!! \n\n", secret);
+                            lo = 0;  // reset default
+                            up = 99; // reset default
+                        }
+                    }break;
                 }
-                printf("please press Enter button for go back to menu \n"); 
-                getch();
+               /* printf("please press Enter button for go back to menu \n"); 
+                getch();*/
                 system("cls");
             }break;
             default:
@@ -666,10 +639,12 @@ void main()
                 }
                 else if (sum == 0)
                 {
+                    fclose(pt);
                     saygoodbye();
                     exit(0);
                 }
             }
         }
     }while (5);
+    fclose(pt);
 }
